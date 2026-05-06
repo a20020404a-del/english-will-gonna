@@ -709,6 +709,117 @@
       transform: translateY(0);
     }
 
+    /* ===== DETAIL PAGE ===== */
+    .use-case-block {
+      border: var(--border);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--card-shadow-lg);
+      margin-bottom: 28px;
+    }
+    .use-case-head {
+      padding: 18px 24px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+    .use-case-head-icon {
+      font-size: 30px;
+      width: 52px; height: 52px;
+      border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0;
+      border: 2.5px solid rgba(0,0,0,0.15);
+    }
+    .use-case-head-text {}
+    .use-case-tag {
+      font-family: var(--font-num);
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      opacity: 0.75;
+      margin-bottom: 3px;
+    }
+    .use-case-title { font-family: var(--font-en); font-size: 22px; }
+    .use-case-subtitle { font-size: 13px; font-weight: 600; margin-top: 2px; opacity: 0.85; }
+
+    .use-case-body { background: #fff; padding: 20px 24px; }
+    .use-case-desc {
+      font-size: 14px; font-weight: 600; color: #374151;
+      line-height: 1.8; margin-bottom: 16px;
+    }
+    .mini-example {
+      background: #F9FAFB;
+      border: 2px solid #E5E7EB;
+      border-radius: 10px;
+      padding: 14px 16px;
+      margin-bottom: 10px;
+      display: flex; gap: 10px; align-items: flex-start;
+    }
+    .mini-example-icon { font-size: 18px; flex-shrink: 0; margin-top: 1px; }
+    .mini-example-en {
+      font-family: var(--font-en);
+      font-size: 17px;
+      color: #111827;
+      line-height: 1.3;
+    }
+    .mini-example-ja { font-size: 12px; color: #6B7280; font-weight: 500; margin-top: 3px; }
+    .mini-example-note {
+      font-size: 11px; font-weight: 700;
+      background: #FFFBEB; color: #92400E;
+      border: 1.5px solid #F59E0B;
+      border-radius: 6px; padding: 2px 8px;
+      margin-top: 4px; display: inline-block;
+    }
+
+    /* Scenario comparison */
+    .scenario-wrap { margin-bottom: 28px; }
+    .scenario-label {
+      font-family: var(--font-num);
+      font-size: 11px; font-weight: 900;
+      letter-spacing: 1.5px;
+      color: #9CA3AF;
+      text-align: center;
+      margin-bottom: 12px;
+    }
+    .scenario-pair {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+    @media (max-width: 560px) { .scenario-pair { grid-template-columns: 1fr; } }
+    .scenario-card {
+      border: var(--border); border-radius: 14px;
+      overflow: hidden; box-shadow: var(--card-shadow);
+    }
+    .scenario-head {
+      padding: 10px 14px;
+      font-family: var(--font-en); font-size: 16px;
+      display: flex; align-items: center; gap: 8px;
+    }
+    .scenario-body { background: #fff; padding: 14px; }
+    .scenario-situation {
+      font-size: 12px; font-weight: 700; color: #6B7280;
+      margin-bottom: 8px;
+    }
+    .scenario-en {
+      font-family: var(--font-en); font-size: 16px;
+      line-height: 1.4; margin-bottom: 6px;
+    }
+    .scenario-ja { font-size: 12px; color: #6B7280; font-weight: 500; }
+    .scenario-why {
+      margin-top: 10px; padding: 8px 10px;
+      border-radius: 8px; font-size: 12px; font-weight: 700;
+    }
+
+    .will-uc-head { background: linear-gradient(135deg, #1D4ED8, #3B82F6); color: #fff; }
+    .will-uc-icon { background: rgba(255,255,255,0.2); }
+    .gonna-uc-head { background: linear-gradient(135deg, #C2410C, #F97316); color: #fff; }
+    .gonna-uc-icon { background: rgba(255,255,255,0.2); }
+
+    .highlight-will-inline { color: var(--will-blue); font-weight: 800; }
+    .highlight-gonna-inline { color: var(--gonna-orange); font-weight: 800; }
+
     /* ===== RESPONSIVE ===== */
     @media (max-width: 640px) {
       .quiz-header { flex-direction: column; }
@@ -741,6 +852,7 @@
     <button class="tab-btn active" onclick="switchTab('learn')"><span class="tab-icon">📖</span>解説</button>
     <button class="tab-btn" onclick="switchTab('examples')"><span class="tab-icon">💬</span>例文集</button>
     <button class="tab-btn" onclick="switchTab('tips')"><span class="tab-icon">💡</span>使い方のコツ</button>
+    <button class="tab-btn" onclick="switchTab('detail')"><span class="tab-icon">🔍</span>詳しい違い</button>
     <button class="tab-btn" onclick="switchTab('quiz-will')"><span class="tab-icon">🔵</span>Will クイズ</button>
     <button class="tab-btn" onclick="switchTab('quiz-gonna')"><span class="tab-icon">🟠</span>Gonna クイズ</button>
   </div>
@@ -1154,6 +1266,490 @@
   </div>
 </section>
 
+<!-- ===== DETAIL SECTION ===== -->
+<section class="section" id="section-detail">
+  <h2 class="section-title">🔍 Will と Gonna の詳しい違い</h2>
+  <p class="section-lead">どちらも「未来」を表すけど、<strong>使うシーンがまったく違います</strong>。場面ごとに使い分けるコツを徹底解説！</p>
+
+  <!-- ======================== WILL 4用法 ======================== -->
+  <div class="divider">WILL の4つの使い方</div>
+
+  <!-- 1. その場で決めた -->
+  <div class="use-case-block fade-in">
+    <div class="use-case-head will-uc-head">
+      <div class="use-case-head-icon will-uc-icon">⚡</div>
+      <div class="use-case-head-text">
+        <div class="use-case-tag">WILL — 使い方 1</div>
+        <div class="use-case-title">その場での決断</div>
+        <div class="use-case-subtitle">Spontaneous Decision — 今決めた！</div>
+      </div>
+    </div>
+    <div class="use-case-body">
+      <p class="use-case-desc">
+        話している<strong>その瞬間に初めて決めた</strong>ことを伝えるときに <span class="highlight-will-inline">will</span> を使います。前から計画していたわけではなく、今この場で「よし、やろう！」と思ったイメージです。
+      </p>
+      <div class="mini-example">
+        <span class="mini-example-icon">📞</span>
+        <div>
+          <div class="mini-example-en">A: The phone is ringing! &nbsp; B: I'<span style="color:var(--will-blue);">ll</span> get it!</div>
+          <div class="mini-example-ja">A:電話が鳴ってるよ！　B:私が出る！（今決めた）</div>
+          <div class="mini-example-note">✅ 今この瞬間に決断 → will</div>
+        </div>
+      </div>
+      <div class="mini-example">
+        <span class="mini-example-icon">🍕</span>
+        <div>
+          <div class="mini-example-en">A: Are you hungry? &nbsp; B: Yeah, I'<span style="color:var(--will-blue);">ll</span> order pizza.</div>
+          <div class="mini-example-ja">A:お腹すいた？　B:うん、ピザ注文する。（今決めた）</div>
+          <div class="mini-example-note">✅ 今この瞬間に決断 → will</div>
+        </div>
+      </div>
+      <div class="mini-example">
+        <span class="mini-example-icon">🚪</span>
+        <div>
+          <div class="mini-example-en">A: It's so hot in here. &nbsp; B: I'<span style="color:var(--will-blue);">ll</span> open the window.</div>
+          <div class="mini-example-ja">A:ここ暑いね。　B:窓開けるね。（今決めた）</div>
+          <div class="mini-example-note">✅ 今この瞬間に決断 → will</div>
+        </div>
+      </div>
+      <div class="tip-box" style="margin-top:4px;">
+        <span class="tip-icon">⚠️</span>
+        <div class="tip-text">
+          <div class="tip-title">GONNA との違い</div>
+          ピザを前から計画していた場合は <span class="highlight-gonna-inline">gonna</span> を使う！<br>
+          「I'm gonna order pizza tonight.」= 今日の夜ピザ食べるつもり（前から決めてた）
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. 一般的な予測 -->
+  <div class="use-case-block fade-in">
+    <div class="use-case-head will-uc-head">
+      <div class="use-case-head-icon will-uc-icon">🔮</div>
+      <div class="use-case-head-text">
+        <div class="use-case-tag">WILL — 使い方 2</div>
+        <div class="use-case-title">一般的な予測・推測</div>
+        <div class="use-case-subtitle">General Prediction — 証拠なしの予測</div>
+      </div>
+    </div>
+    <div class="use-case-body">
+      <p class="use-case-desc">
+        目の前の証拠は特になく、<strong>経験や知識・勘</strong>をもとに「たぶん〜だろう」と予測するときは <span class="highlight-will-inline">will</span> を使います。天気予報・占い・長期的な見通しなどに多く登場します。
+      </p>
+      <div class="mini-example">
+        <span class="mini-example-icon">☀️</span>
+        <div>
+          <div class="mini-example-en">It <span style="color:var(--will-blue);">will</span> be sunny tomorrow.</div>
+          <div class="mini-example-ja">明日は晴れるでしょう。（天気予報・根拠は計算上）</div>
+          <div class="mini-example-note">✅ データ・経験に基づく予測 → will</div>
+        </div>
+      </div>
+      <div class="mini-example">
+        <span class="mini-example-icon">🤖</span>
+        <div>
+          <div class="mini-example-en">AI <span style="color:var(--will-blue);">will</span> change the world in the next 10 years.</div>
+          <div class="mini-example-ja">AIは今後10年で世界を変えるでしょう。</div>
+          <div class="mini-example-note">✅ 長期的な見通し・予測 → will</div>
+        </div>
+      </div>
+      <div class="mini-example">
+        <span class="mini-example-icon">🎯</span>
+        <div>
+          <div class="mini-example-en">You <span style="color:var(--will-blue);">will</span> love this restaurant!</div>
+          <div class="mini-example-ja">あなたはきっとこのレストランが気に入るよ！</div>
+          <div class="mini-example-note">✅ 経験からの確信 → will</div>
+        </div>
+      </div>
+      <div class="tip-box" style="margin-top:4px;">
+        <span class="tip-icon">⚠️</span>
+        <div class="tip-text">
+          <div class="tip-title">GONNA との違い</div>
+          目の前に証拠がある「今まさに〜しそう」は <span class="highlight-gonna-inline">gonna</span>！<br>
+          「Look at those clouds — it's gonna rain!」= 雲を見て「雨降りそう！」（今の証拠アリ）
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. 約束・誓い -->
+  <div class="use-case-block fade-in">
+    <div class="use-case-head will-uc-head">
+      <div class="use-case-head-icon will-uc-icon">🤝</div>
+      <div class="use-case-head-text">
+        <div class="use-case-tag">WILL — 使い方 3</div>
+        <div class="use-case-title">約束・誓い・強い意志</div>
+        <div class="use-case-subtitle">Promise & Commitment — 必ずやる！</div>
+      </div>
+    </div>
+    <div class="use-case-body">
+      <p class="use-case-desc">
+        「絶対に〜する」「必ず〜します」という<strong>強い意志・約束・誓い</strong>を表すときに <span class="highlight-will-inline">will</span> を使います。フォーマルな誓いからカジュアルな約束まで幅広く使えます。
+      </p>
+      <div class="mini-example">
+        <span class="mini-example-icon">💍</span>
+        <div>
+          <div class="mini-example-en">I <span style="color:var(--will-blue);">will</span> love you forever.</div>
+          <div class="mini-example-ja">あなたをずっと愛し続けます。（結婚の誓い）</div>
+          <div class="mini-example-note">✅ 永遠の誓い → will</div>
+        </div>
+      </div>
+      <div class="mini-example">
+        <span class="mini-example-icon">💪</span>
+        <div>
+          <div class="mini-example-en">I <span style="color:var(--will-blue);">will</span> never give up!</div>
+          <div class="mini-example-ja">絶対に諦めない！（強い意志の宣言）</div>
+          <div class="mini-example-note">✅ 強い意志 → will</div>
+        </div>
+      </div>
+      <div class="mini-example">
+        <span class="mini-example-icon">📅</span>
+        <div>
+          <div class="mini-example-en">I <span style="color:var(--will-blue);">will</span> call you back in 10 minutes.</div>
+          <div class="mini-example-ja">10分後に折り返し電話します。（ビジネスの約束）</div>
+          <div class="mini-example-note">✅ 約束・コミットメント → will</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 4. 申し出・提案 -->
+  <div class="use-case-block fade-in">
+    <div class="use-case-head will-uc-head">
+      <div class="use-case-head-icon will-uc-icon">🙋</div>
+      <div class="use-case-head-text">
+        <div class="use-case-tag">WILL — 使い方 4</div>
+        <div class="use-case-title">申し出・提案・依頼</div>
+        <div class="use-case-subtitle">Offer & Request — 〜しましょうか？</div>
+      </div>
+    </div>
+    <div class="use-case-body">
+      <p class="use-case-desc">
+        相手に何かを<strong>申し出たり（〜しましょうか？）、頼んだり（〜してくれますか？）</strong>するときにも <span class="highlight-will-inline">will</span> を使います。特に "Will you...?" は丁寧な依頼表現です。
+      </p>
+      <div class="mini-example">
+        <span class="mini-example-icon">🧳</span>
+        <div>
+          <div class="mini-example-en">I'<span style="color:var(--will-blue);">ll</span> carry your bag for you.</div>
+          <div class="mini-example-ja">バッグを持ちましょうか。（親切な申し出）</div>
+          <div class="mini-example-note">✅ 自発的な申し出 → will</div>
+        </div>
+      </div>
+      <div class="mini-example">
+        <span class="mini-example-icon">🙏</span>
+        <div>
+          <div class="mini-example-en"><span style="color:var(--will-blue);">Will</span> you please close the door?</div>
+          <div class="mini-example-ja">ドアを閉めてもらえますか？（丁寧な依頼）</div>
+          <div class="mini-example-note">✅ 丁寧な依頼 → Will you...?</div>
+        </div>
+      </div>
+      <div class="mini-example">
+        <span class="mini-example-icon">☕</span>
+        <div>
+          <div class="mini-example-en"><span style="color:var(--will-blue);">Will</span> you have some coffee?</div>
+          <div class="mini-example-ja">コーヒーはいかがですか？（飲み物を勧める）</div>
+          <div class="mini-example-note">✅ 勧める・申し出 → Will you...?</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================== GONNA 3用法 ======================== -->
+  <div class="divider">GONNA の3つの使い方</div>
+
+  <!-- gonna 1: 事前計画 -->
+  <div class="use-case-block fade-in">
+    <div class="use-case-head gonna-uc-head">
+      <div class="use-case-head-icon gonna-uc-icon">📅</div>
+      <div class="use-case-head-text">
+        <div class="use-case-tag">GONNA — 使い方 1</div>
+        <div class="use-case-title">事前の計画・意図</div>
+        <div class="use-case-subtitle">Pre-planned Intention — 前から決めていたこと</div>
+      </div>
+    </div>
+    <div class="use-case-body">
+      <p class="use-case-desc">
+        今この場で決めたのではなく、<strong>もともと計画していた・前から決めていた</strong>ことを話すときに <span class="highlight-gonna-inline">gonna</span> を使います。日常会話でいちばんよく使われる用法です。
+      </p>
+      <div class="mini-example">
+        <span class="mini-example-icon">✈️</span>
+        <div>
+          <div class="mini-example-en">I'm <span style="color:var(--gonna-orange);">gonna</span> travel to Tokyo next month.</div>
+          <div class="mini-example-ja">来月東京に旅行する予定。（チケットも買ってある）</div>
+          <div class="mini-example-note">✅ 前から計画済み → gonna</div>
+        </div>
+      </div>
+      <div class="mini-example">
+        <span class="mini-example-icon">📚</span>
+        <div>
+          <div class="mini-example-en">She's <span style="color:var(--gonna-orange);">gonna</span> study medicine at university.</div>
+          <div class="mini-example-ja">彼女は大学で医学を勉強するつもり。（もう決めた）</div>
+          <div class="mini-example-note">✅ 決意・長期計画 → gonna</div>
+        </div>
+      </div>
+      <div class="mini-example">
+        <span class="mini-example-icon">🎂</span>
+        <div>
+          <div class="mini-example-en">We're <span style="color:var(--gonna-orange);">gonna</span> throw a surprise party for him!</div>
+          <div class="mini-example-ja">彼のためにサプライズパーティーを開く予定！</div>
+          <div class="mini-example-note">✅ 前から計画した催し → gonna</div>
+        </div>
+      </div>
+      <div class="tip-box" style="margin-top:4px; background:linear-gradient(135deg,#FFF7ED,#FFEDD5); border-color:var(--gonna-orange);">
+        <span class="tip-icon">⚠️</span>
+        <div class="tip-text">
+          <div class="tip-title" style="color:var(--gonna-orange);">WILL との違い</div>
+          今初めて決めた場合は <span class="highlight-will-inline">will</span>！<br>
+          「I'll travel to Tokyo!」= 今この会話の中で「行こう！」と決めた瞬間
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- gonna 2: 証拠に基づく予測 -->
+  <div class="use-case-block fade-in">
+    <div class="use-case-head gonna-uc-head">
+      <div class="use-case-head-icon gonna-uc-icon">🌩️</div>
+      <div class="use-case-head-text">
+        <div class="use-case-tag">GONNA — 使い方 2</div>
+        <div class="use-case-title">証拠に基づく予測</div>
+        <div class="use-case-subtitle">Evidence-based Prediction — 今の状況を見て「〜しそう」</div>
+      </div>
+    </div>
+    <div class="use-case-body">
+      <p class="use-case-desc">
+        <strong>目の前の状況や証拠</strong>を見て「これは〜になりそうだ」と判断するときに <span class="highlight-gonna-inline">gonna</span> を使います。今この瞬間に観察できる何かがあるのがポイントです。
+      </p>
+      <div class="mini-example">
+        <span class="mini-example-icon">☁️</span>
+        <div>
+          <div class="mini-example-en">Look at those dark clouds — it's <span style="color:var(--gonna-orange);">gonna</span> rain!</div>
+          <div class="mini-example-ja">あの黒い雲を見て — 雨降りそう！（雲が証拠）</div>
+          <div class="mini-example-note">✅ 目に見える証拠アリ → gonna</div>
+        </div>
+      </div>
+      <div class="mini-example">
+        <span class="mini-example-icon">🤢</span>
+        <div>
+          <div class="mini-example-en">He looks terrible — he's <span style="color:var(--gonna-orange);">gonna</span> be sick.</div>
+          <div class="mini-example-ja">顔色が悪い — 具合悪くなりそう。（顔色が証拠）</div>
+          <div class="mini-example-note">✅ 今の状態が証拠 → gonna</div>
+        </div>
+      </div>
+      <div class="mini-example">
+        <span class="mini-example-icon">🏎️</span>
+        <div>
+          <div class="mini-example-en">Watch out! That car is <span style="color:var(--gonna-orange);">gonna</span> crash!</div>
+          <div class="mini-example-ja">危ない！あの車ぶつかりそう！（今まさに）</div>
+          <div class="mini-example-note">✅ 今起きていることが証拠 → gonna</div>
+        </div>
+      </div>
+      <div class="tip-box" style="margin-top:4px; background:linear-gradient(135deg,#FFF7ED,#FFEDD5); border-color:var(--gonna-orange);">
+        <span class="tip-icon">⚠️</span>
+        <div class="tip-text">
+          <div class="tip-title" style="color:var(--gonna-orange);">WILL との違い</div>
+          根拠なしに「たぶん〜だろう」という予測は <span class="highlight-will-inline">will</span>！<br>
+          「It will rain tomorrow.」= 天気予報・経験則による予測（今は晴れでもOK）
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- gonna 3: 強い意図 -->
+  <div class="use-case-block fade-in">
+    <div class="use-case-head gonna-uc-head">
+      <div class="use-case-head-icon gonna-uc-icon">😤</div>
+      <div class="use-case-head-text">
+        <div class="use-case-tag">GONNA — 使い方 3</div>
+        <div class="use-case-title">強い意図・やる気の表明</div>
+        <div class="use-case-subtitle">Strong Intention — 「絶対やってやる！」（カジュアル）</div>
+      </div>
+    </div>
+    <div class="use-case-body">
+      <p class="use-case-desc">
+        友達や仲間に向けて<strong>「絶対やる！」「やってやる！」</strong>という気持ちをカジュアルに表現するとき、<span class="highlight-gonna-inline">gonna</span> が自然に使われます。SNS・ゲーム・スポーツシーンで大活躍！
+      </p>
+      <div class="mini-example">
+        <span class="mini-example-icon">🏋️</span>
+        <div>
+          <div class="mini-example-en">I'm <span style="color:var(--gonna-orange);">gonna</span> hit the gym every day this month!</div>
+          <div class="mini-example-ja">今月は毎日ジムに行くぞ！（意気込み）</div>
+          <div class="mini-example-note">✅ カジュアルな決意表明 → gonna</div>
+        </div>
+      </div>
+      <div class="mini-example">
+        <span class="mini-example-icon">🎮</span>
+        <div>
+          <div class="mini-example-en">I'm not <span style="color:var(--gonna-orange);">gonna</span> lose this time!</div>
+          <div class="mini-example-ja">今度こそ負けないぞ！（ゲーム・勝負の前）</div>
+          <div class="mini-example-note">✅ 強い否定の意志 → not gonna</div>
+        </div>
+      </div>
+      <div class="mini-example">
+        <span class="mini-example-icon">📸</span>
+        <div>
+          <div class="mini-example-en">We're <span style="color:var(--gonna-orange);">gonna</span> make this the best summer ever! ☀️</div>
+          <div class="mini-example-ja">最高の夏にしようぜ！（SNS投稿っぽい）</div>
+          <div class="mini-example-note">✅ SNS・仲間への呼びかけ → gonna</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================== SCENARIO COMPARISONS ======================== -->
+  <div class="divider">場面別 どっちを使う？</div>
+
+  <!-- Scenario 1: Restaurant -->
+  <div class="scenario-wrap fade-in">
+    <div class="scenario-label">SCENARIO 1 — レストランで注文するとき</div>
+    <div class="scenario-pair">
+      <div class="scenario-card">
+        <div class="scenario-head will-uc-head">⚡ Will を使うケース</div>
+        <div class="scenario-body">
+          <div class="scenario-situation">📌 状況：メニューを見て今決めた</div>
+          <div class="scenario-en" style="color:var(--will-blue);">"I'll have the pasta, please."</div>
+          <div class="scenario-ja">パスタにします。（今見て決めた）</div>
+          <div class="scenario-why" style="background:var(--will-light); color:#1E3A5F;">今この瞬間に決断したから will</div>
+        </div>
+      </div>
+      <div class="scenario-card">
+        <div class="scenario-head gonna-uc-head">📅 Gonna を使うケース</div>
+        <div class="scenario-body">
+          <div class="scenario-situation">📌 状況：店に来る前から決めていた</div>
+          <div class="scenario-en" style="color:var(--gonna-orange);">"I'm gonna get the pasta. I looked it up!"</div>
+          <div class="scenario-ja">パスタにするよ。事前に調べてた！</div>
+          <div class="scenario-why" style="background:var(--gonna-light); color:#9A3412;">前から決めていた計画 → gonna</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scenario 2: Weather -->
+  <div class="scenario-wrap fade-in">
+    <div class="scenario-label">SCENARIO 2 — 天気について話すとき</div>
+    <div class="scenario-pair">
+      <div class="scenario-card">
+        <div class="scenario-head will-uc-head">🔮 Will を使うケース</div>
+        <div class="scenario-body">
+          <div class="scenario-situation">📌 状況：天気予報を見て（今は晴れ）</div>
+          <div class="scenario-en" style="color:var(--will-blue);">"It will rain tomorrow."</div>
+          <div class="scenario-ja">明日は雨が降るでしょう。</div>
+          <div class="scenario-why" style="background:var(--will-light); color:#1E3A5F;">データ・経験則による予測 → will</div>
+        </div>
+      </div>
+      <div class="scenario-card">
+        <div class="scenario-head gonna-uc-head">🌩️ Gonna を使うケース</div>
+        <div class="scenario-body">
+          <div class="scenario-situation">📌 状況：黒い雲が見えている（今）</div>
+          <div class="scenario-en" style="color:var(--gonna-orange);">"Look at those clouds — it's gonna rain!"</div>
+          <div class="scenario-ja">あの雲見て — 雨降りそう！</div>
+          <div class="scenario-why" style="background:var(--gonna-light); color:#9A3412;">目の前に証拠がある予測 → gonna</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scenario 3: Weekend plans -->
+  <div class="scenario-wrap fade-in">
+    <div class="scenario-label">SCENARIO 3 — 週末の予定を話すとき</div>
+    <div class="scenario-pair">
+      <div class="scenario-card">
+        <div class="scenario-head will-uc-head">⚡ Will を使うケース</div>
+        <div class="scenario-body">
+          <div class="scenario-situation">📌 状況：誘われて今決めた</div>
+          <div class="scenario-en" style="color:var(--will-blue);">"Sounds fun! I'll come with you."</div>
+          <div class="scenario-ja">楽しそう！一緒に行くよ。（今決めた）</div>
+          <div class="scenario-why" style="background:var(--will-light); color:#1E3A5F;">この会話の中で決断 → will</div>
+        </div>
+      </div>
+      <div class="scenario-card">
+        <div class="scenario-head gonna-uc-head">📅 Gonna を使うケース</div>
+        <div class="scenario-body">
+          <div class="scenario-situation">📌 状況：前から計画していた</div>
+          <div class="scenario-en" style="color:var(--gonna-orange);">"I'm gonna hang out with friends this weekend."</div>
+          <div class="scenario-ja">今週末、友達と遊ぶ予定。</div>
+          <div class="scenario-why" style="background:var(--gonna-light); color:#9A3412;">前から決まっていた予定 → gonna</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scenario 4: Formal vs casual -->
+  <div class="scenario-wrap fade-in">
+    <div class="scenario-label">SCENARIO 4 — 同じ内容をフォーマル／カジュアルに言う</div>
+    <div class="scenario-pair">
+      <div class="scenario-card">
+        <div class="scenario-head will-uc-head">🎩 フォーマル（ビジネス）</div>
+        <div class="scenario-body">
+          <div class="scenario-situation">📌 ビジネスメール・会議・公式の場</div>
+          <div class="scenario-en" style="color:var(--will-blue);">"I will submit the report by Friday."</div>
+          <div class="scenario-ja">金曜日までにレポートを提出します。</div>
+          <div class="scenario-why" style="background:var(--will-light); color:#1E3A5F;">責任ある約束・公式の表明 → will</div>
+        </div>
+      </div>
+      <div class="scenario-card">
+        <div class="scenario-head gonna-uc-head">😎 カジュアル（友達・SNS）</div>
+        <div class="scenario-body">
+          <div class="scenario-situation">📌 友達・SNS・カジュアルな会話</div>
+          <div class="scenario-en" style="color:var(--gonna-orange);">"I'm gonna finish this report today!"</div>
+          <div class="scenario-ja">今日このレポート終わらせるぞ！</div>
+          <div class="scenario-why" style="background:var(--gonna-light); color:#9A3412;">カジュアルなやる気表明 → gonna</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================== SUMMARY ======================== -->
+  <div class="divider">まとめ</div>
+
+  <div class="card fade-in" style="background:linear-gradient(135deg,#F0FDF4,#ECFDF5);">
+    <div class="card-title">🎯 Will vs Gonna — 完全まとめ</div>
+    <div style="overflow-x:auto;">
+      <table style="width:100%; border-collapse:collapse; font-size:13px;">
+        <thead>
+          <tr style="background:#1a1a1a; color:#fff;">
+            <th style="padding:12px 14px; text-align:left;">場面</th>
+            <th style="padding:12px 14px; text-align:center; color:#93C5FD;">Will 🔵</th>
+            <th style="padding:12px 14px; text-align:center; color:#FCA5A5;">Gonna 🟠</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:2px solid #D1FAE5;">
+            <td style="padding:11px 14px; font-weight:700;">決断のタイミング</td>
+            <td style="padding:11px 14px; text-align:center; color:var(--will-blue); font-weight:700;">今この瞬間に決めた</td>
+            <td style="padding:11px 14px; text-align:center; color:var(--gonna-orange); font-weight:700;">前から計画していた</td>
+          </tr>
+          <tr style="border-bottom:2px solid #D1FAE5; background:#F0FDF4;">
+            <td style="padding:11px 14px; font-weight:700;">天気の予測</td>
+            <td style="padding:11px 14px; text-align:center; color:var(--will-blue); font-weight:700;">証拠なし・経験・データ</td>
+            <td style="padding:11px 14px; text-align:center; color:var(--gonna-orange); font-weight:700;">目の前に証拠がある</td>
+          </tr>
+          <tr style="border-bottom:2px solid #D1FAE5;">
+            <td style="padding:11px 14px; font-weight:700;">フォーマル度</td>
+            <td style="padding:11px 14px; text-align:center; color:var(--will-blue); font-weight:700;">高い（ビジネス・公式）</td>
+            <td style="padding:11px 14px; text-align:center; color:var(--gonna-orange); font-weight:700;">低い（友達・SNS）</td>
+          </tr>
+          <tr style="border-bottom:2px solid #D1FAE5; background:#F0FDF4;">
+            <td style="padding:11px 14px; font-weight:700;">申し出・お願い</td>
+            <td style="padding:11px 14px; text-align:center; color:var(--will-blue); font-weight:700;">Will you...? でOK</td>
+            <td style="padding:11px 14px; text-align:center; color:#9CA3AF;">あまり使わない</td>
+          </tr>
+          <tr>
+            <td style="padding:11px 14px; font-weight:700;">歌・映画・SNS</td>
+            <td style="padding:11px 14px; text-align:center; color:#9CA3AF;">バラード・誓いの歌</td>
+            <td style="padding:11px 14px; text-align:center; color:var(--gonna-orange); font-weight:700;">ポップス・日常台詞</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div style="text-align:center; margin-top:32px; display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
+    <button class="retry-btn" style="background:var(--will-light); color:var(--will-blue);" onclick="switchTab('quiz-will')">🔵 Will クイズで腕試し！</button>
+    <button class="retry-btn" style="background:var(--gonna-light); color:var(--gonna-orange);" onclick="switchTab('quiz-gonna')">🟠 Gonna クイズで腕試し！</button>
+  </div>
+</section>
+
 <!-- ===== WILL QUIZ ===== -->
 <section class="section" id="section-quiz-will">
   <div class="quiz-header">
@@ -1458,7 +2054,7 @@ function switchTab(tab) {
   document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
   document.getElementById('section-' + tab).classList.add('active');
-  const idx = ['learn','examples','tips','quiz-will','quiz-gonna'].indexOf(tab);
+  const idx = ['learn','examples','tips','detail','quiz-will','quiz-gonna'].indexOf(tab);
   document.querySelectorAll('.tab-btn')[idx].classList.add('active');
   window.scrollTo({ top: 0, behavior: 'smooth' });
   observeFadeIns();
