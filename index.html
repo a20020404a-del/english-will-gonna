@@ -536,25 +536,191 @@
     .option-btn.wrong .opt-label { background: #EF4444; color: #fff; }
     .option-btn:disabled { cursor: default; }
 
-    .q-feedback {
-      margin-top: 16px;
-      padding: 14px 18px;
-      border-radius: 10px;
-      font-size: 14px;
-      font-weight: 700;
-      display: none;
-      align-items: center;
-      gap: 10px;
-    }
-    .q-feedback.show { display: flex; animation: fadeIn 0.25s ease; }
+    .q-feedback { margin-top: 16px; display: none; }
+    .q-feedback.show { display: block; animation: fadeIn 0.3s ease; }
     @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(4px); }
-      to { opacity: 1; transform: translateY(0); }
+      from { opacity: 0; transform: translateY(6px); }
+      to   { opacity: 1; transform: translateY(0); }
     }
-    .q-feedback.fb-correct { background: #ECFDF5; color: #065F46; }
-    .q-feedback.fb-wrong { background: #FEF2F2; color: #991B1B; }
-    .fb-icon { font-size: 22px; flex-shrink: 0; }
-    .fb-explanation { font-size: 13px; font-weight: 500; margin-top: 4px; }
+
+    /* ===== TRANSLATION INPUT UI ===== */
+    .q-japanese {
+      font-size: clamp(18px, 3.5vw, 26px);
+      font-weight: 800;
+      color: #111827;
+      line-height: 1.5;
+      margin: 14px 0 12px;
+      padding: 16px 20px;
+      background: linear-gradient(135deg, #FFFBEB, #FEF3C7);
+      border: 2.5px solid #F59E0B;
+      border-radius: 14px;
+      box-shadow: 3px 3px 0 #F59E0B;
+    }
+    .q-context-tag {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      padding: 4px 12px;
+      border-radius: 20px;
+      background: #1a1a1a;
+      color: #FCD34D;
+      margin-bottom: 10px;
+    }
+    .q-hint-tag {
+      display: inline-block;
+      font-size: 12px;
+      font-weight: 700;
+      color: #7C3AED;
+      background: #EDE9FE;
+      border: 1.5px solid #7C3AED;
+      border-radius: 6px;
+      padding: 3px 10px;
+      margin-left: 8px;
+      vertical-align: middle;
+    }
+    .translate-wrap {
+      display: flex;
+      gap: 10px;
+      margin: 14px 0;
+      flex-wrap: wrap;
+    }
+    .translate-input {
+      flex: 1;
+      min-width: 180px;
+      font-family: var(--font-en);
+      font-size: 18px;
+      color: #111827;
+      background: #fff;
+      border: 2.5px solid #D1D5DB;
+      border-radius: 12px;
+      padding: 13px 16px;
+      outline: none;
+      transition: border-color 0.2s, box-shadow 0.2s;
+      box-shadow: 2px 2px 0 #E5E7EB;
+    }
+    .translate-input:focus {
+      border-color: #6366F1;
+      box-shadow: 3px 3px 0 #A5B4FC;
+    }
+    .translate-input.input-correct {
+      border-color: #10B981;
+      background: #ECFDF5;
+      box-shadow: 3px 3px 0 #10B981;
+    }
+    .translate-input.input-wrong {
+      border-color: #EF4444;
+      background: #FEF2F2;
+      box-shadow: 3px 3px 0 #EF4444;
+    }
+    .translate-input:disabled { opacity: 0.85; cursor: default; }
+
+    .submit-btn {
+      background: #6366F1;
+      color: #fff;
+      border: 2.5px solid #1a1a1a;
+      border-radius: 12px;
+      padding: 13px 22px;
+      font-family: var(--font-ja);
+      font-size: 15px;
+      font-weight: 800;
+      cursor: pointer;
+      white-space: nowrap;
+      box-shadow: 3px 3px 0 #1a1a1a;
+      transition: all 0.15s;
+    }
+    .submit-btn:hover:not(:disabled) {
+      transform: translate(-2px,-2px);
+      box-shadow: 5px 5px 0 #1a1a1a;
+    }
+    .submit-btn:disabled { opacity: 0.45; cursor: default; transform: none; box-shadow: 1px 1px 0 #9CA3AF; }
+
+    .fb-result-badge {
+      display: inline-block;
+      font-size: 15px;
+      font-weight: 800;
+      padding: 8px 18px;
+      border-radius: 10px;
+      margin-bottom: 12px;
+    }
+    .badge-correct { background: #ECFDF5; color: #065F46; border: 2px solid #10B981; }
+    .badge-wrong   { background: #FEF2F2; color: #991B1B; border: 2px solid #EF4444; }
+
+    .correct-answer-box {
+      border-radius: 12px;
+      padding: 16px 18px;
+      margin: 4px 0 12px;
+      border: 2.5px solid var(--will-blue);
+      background: linear-gradient(135deg, #EFF6FF, #DBEAFE);
+    }
+    .correct-answer-box.gonna-reveal {
+      border-color: var(--gonna-orange);
+      background: linear-gradient(135deg, #FFF7ED, #FFEDD5);
+    }
+    .correct-answer-box.mix-reveal {
+      border-color: #7C3AED;
+      background: linear-gradient(135deg, #F5F3FF, #EDE9FE);
+    }
+    .correct-label {
+      font-family: var(--font-num);
+      font-size: 10px;
+      font-weight: 900;
+      letter-spacing: 1.5px;
+      color: var(--will-blue);
+      margin-bottom: 6px;
+    }
+    .gonna-reveal .correct-label { color: var(--gonna-orange); }
+    .mix-reveal   .correct-label { color: #7C3AED; }
+
+    .user-answer-row {
+      font-size: 13px;
+      color: #6B7280;
+      margin-bottom: 8px;
+      display: none;
+      align-items: baseline;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+    .user-answer-row .user-label { font-weight: 700; flex-shrink: 0; }
+    .user-answer-row .user-text  { font-family: var(--font-en); text-decoration: line-through; color: #EF4444; }
+    .correct-en-main {
+      font-family: var(--font-en);
+      font-size: clamp(18px, 3vw, 22px);
+      color: #111827;
+      line-height: 1.4;
+      margin-bottom: 10px;
+    }
+    .speak-after-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: #fff;
+      border: 2px solid #10B981;
+      border-radius: 20px;
+      padding: 5px 14px;
+      font-family: var(--font-ja);
+      font-size: 12px;
+      font-weight: 800;
+      color: #065F46;
+      cursor: pointer;
+      box-shadow: 2px 2px 0 #10B981;
+      transition: all 0.15s;
+    }
+    .speak-after-btn:hover { transform: translate(-1px,-1px); box-shadow: 3px 3px 0 #10B981; }
+    .speak-after-btn.speaking { background: #D1FAE5; animation: speakPulse 0.6s ease-in-out infinite alternate; }
+
+    .q-explanation-box {
+      background: #FFFBEB;
+      border: 1.5px solid #F59E0B;
+      border-radius: 10px;
+      padding: 12px 14px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #374151;
+      line-height: 1.8;
+      display: none;
+    }
+    .q-explanation-box.show { display: block; animation: fadeIn 0.25s ease; }
 
     .next-btn {
       margin-top: 18px;
@@ -1881,540 +2047,520 @@
 
 <script>
 // =========================================================
-// DATA
+// WILL QUESTIONS  (翻訳形式 20問)
 // =========================================================
-
 const WILL_QUESTIONS = [
   {
-    q: '「明日あなたに電話します」を英語にすると？',
-    opts: ['I will call you tomorrow.', 'I gonna call you tomorrow.', 'I calling you tomorrow.', 'I will calling you tomorrow.'],
-    ans: 0,
-    exp: 'will の後は動詞の原形 call を使います。'
+    ja: '「明日、あなたに電話します」',
+    context: '約束・ビジネス',
+    main: 'I will call you tomorrow.',
+    answers: ['I will call you tomorrow','I\'ll call you tomorrow','I will call you tomorrow.','I\'ll call you tomorrow.'],
+    speak: 'I will call you tomorrow.',
+    exp: 'will + 動詞の原形 call。I\'ll は I will の短縮形で、会話でよく使います。'
   },
   {
-    q: '正しい will の文はどれ？',
-    opts: ['She will goes to school.', 'She will go to school.', 'She will going to school.', 'She wills go to school.'],
-    ans: 1,
-    exp: 'will の後は動詞の原形。goes や going は使いません。'
+    ja: '「彼女はあなたを助けてくれるでしょう」',
+    context: '予測・確信',
+    main: 'She will help you.',
+    answers: ['She will help you','She\'ll help you','She will help you.','She\'ll help you.'],
+    speak: 'She will help you.',
+    exp: 'will は「〜するでしょう」という予測・確信にも使います。she/he/it の後でも will の形は変わりません。'
   },
   {
-    q: '"will" の使い方として正しいのは？',
-    opts: ['過去の出来事を話す時', '今まさにしていることを話す時', '未来のことを話す時', '習慣を話す時'],
-    ans: 2,
-    exp: 'will は未来のこと（予測・意思・約束）を表します。'
+    ja: '「今夜、雨が降るでしょう」',
+    context: '天気予報・経験からの予測',
+    main: 'It will rain tonight.',
+    answers: ['It will rain tonight','It\'ll rain tonight','It will rain tonight.','It\'ll rain tonight.'],
+    speak: 'It will rain tonight.',
+    exp: 'will は目の前に証拠がなくても「たぶん〜だろう」と予測するときに使います。'
   },
   {
-    q: '( ) に入る正しい語は？\n"I ___ help you."',
-    opts: ['wills', 'will', 'gonna', 'willing'],
-    ans: 1,
-    exp: '主語 + will + 動詞の原形。will の形は変わりません。'
+    ja: '「（電話が鳴った！）私が出ます！」',
+    context: '今この瞬間に決めた',
+    main: 'I\'ll get it!',
+    answers: ['I\'ll get it','I will get it','I\'ll get it!','I will get it!','I\'ll answer it','I will answer it','I\'ll answer it!'],
+    speak: 'I\'ll get it!',
+    exp: '今この瞬間に「出よう！」と決めた → will。get it / answer it のどちらでも OK！'
   },
   {
-    q: '"It ___ rain tomorrow." の空欄に入るのは？',
-    opts: ['will', 'wills', 'are going', 'be'],
-    ans: 0,
-    exp: '予測や予報には will を使います。wills は誤りです。'
+    ja: '「私は絶対に諦めません」',
+    context: '強い意志・誓い',
+    main: 'I will never give up.',
+    answers: ['I will never give up','I\'ll never give up','I will never give up.','I\'ll never give up!','I will never give up!'],
+    speak: 'I will never give up.',
+    exp: 'will + never で「絶対に〜しない」という強い意志を表します。'
   },
   {
-    q: 'フォーマルな場面（ビジネスメールなど）で使うべき表現は？',
-    opts: ["I'm gonna do it.", 'I will complete the report.', "I'm gonna finish it.", 'Gonna be there.'],
-    ans: 1,
-    exp: 'ビジネスや公式な文章では gonna ではなく will を使います。'
+    ja: '「ドアを閉めてもらえますか？」',
+    context: '丁寧なお願い',
+    main: 'Will you close the door?',
+    answers: ['Will you close the door','Will you close the door?','Will you please close the door','Will you please close the door?'],
+    speak: 'Will you close the door?',
+    exp: '"Will you...?" は「〜してもらえますか？」という丁寧な依頼表現。please を加えるとさらに丁寧です。'
   },
   {
-    q: '"They will arrive at 6 pm." の日本語訳は？',
-    opts: ['彼らは6時に到着した', '彼らは6時に到着している', '彼らは6時に到着するでしょう', '彼らは6時に到着したい'],
-    ans: 2,
-    exp: 'will は未来を表すので「〜するでしょう」という意味になります。'
+    ja: '「彼は5時に来るでしょう」',
+    context: '予測・スケジュール',
+    main: 'He will come at 5.',
+    answers: ['He will come at 5','He\'ll come at 5','He will come at 5.','He\'ll come at 5.','He will come at 5 PM','He\'ll come at 5 PM','He will come at five','He\'ll come at five'],
+    speak: 'He will come at 5.',
+    exp: 'will は未来の予定・スケジュールを伝えるときにも使います。'
   },
   {
-    q: '正しい will の文はどれ？',
-    opts: ['I will am happy.', 'I will be happy.', 'I will is happy.', 'I will being happy.'],
-    ans: 1,
-    exp: 'be動詞の原形は be なので、will be が正しい形です。'
+    ja: '「（今申し出た）バッグを持ちましょうか？」',
+    context: '気遣いの申し出',
+    main: 'I\'ll carry your bag.',
+    answers: ['I\'ll carry your bag','I will carry your bag','I\'ll carry your bag.','I will carry your bag.','I\'ll carry your bag for you','I will carry your bag for you'],
+    speak: 'I\'ll carry your bag.',
+    exp: '自発的な申し出（今決めた）→ will。for you を付けると「あなたのために」という優しさが出ます。'
   },
   {
-    q: '"Will you help me?" の意味は？',
-    opts: ['あなたは私を助けましたか？', '手伝ってもらえますか？', '私はあなたを助けます', 'あなたは助けてほしいですか？'],
-    ans: 1,
-    exp: 'Will you...? は「〜してもらえますか？」という丁寧な依頼表現です。'
+    ja: '「彼らは来週到着するでしょう」',
+    context: '未来の予測',
+    main: 'They will arrive next week.',
+    answers: ['They will arrive next week','They\'ll arrive next week','They will arrive next week.','They\'ll arrive next week.'],
+    speak: 'They will arrive next week.',
+    exp: 'they の後も will の形は変わりません。arrive = 到着する。'
   },
   {
-    q: '"will" を正しく使っている文は？',
-    opts: ['He will studying tonight.', 'He will study tonight.', 'He will studies tonight.', 'He wills study tonight.'],
-    ans: 1,
-    exp: 'will の後は必ず動詞の原形（study）を使います。'
+    ja: '「あなたはこの映画が絶対気に入るでしょう！」',
+    context: '経験からの強い確信',
+    main: 'You will love this movie!',
+    answers: ['You will love this movie','You\'ll love this movie','You will love this movie!','You\'ll love this movie!','You will love this movie.'],
+    speak: 'You will love this movie!',
+    exp: '経験からくる確信 → will。「きっと好きになるはず！」という強いニュアンス。'
   },
   {
-    q: '"I will not go." の短縮形は？',
-    opts: ["I'll not go.", "I won't go.", "I willn't go.", 'I not go.'],
-    ans: 1,
-    exp: 'will not の短縮形は won\'t です。'
+    ja: '「（ビジネスメール）金曜日までにレポートを送ります」',
+    context: 'フォーマルな約束',
+    main: 'I will send the report by Friday.',
+    answers: ['I will send the report by Friday','I\'ll send the report by Friday','I will send the report by Friday.','I\'ll send the report by Friday.'],
+    speak: 'I will send the report by Friday.',
+    exp: 'ビジネスの約束・フォーマルな表明 → will。by Friday = 「金曜日までに」。'
   },
   {
-    q: '"I\'ll" は何の短縮形？',
-    opts: ['I am', 'I have', 'I will', 'I would'],
-    ans: 2,
-    exp: "I'll = I will の短縮形です。とてもよく使われます！"
+    ja: '「雨は降らないでしょう」',
+    context: '否定の予測',
+    main: 'It won\'t rain.',
+    answers: ['It won\'t rain','It won\'t rain.','It will not rain','It will not rain.'],
+    speak: 'It won\'t rain.',
+    exp: 'will not の短縮形が won\'t。"won\'t rain" = 「雨は降らないでしょう」。'
   },
   {
-    q: '"She will eat lunch at noon." を否定形にすると？',
-    opts: ["She won't eat lunch at noon.", 'She will not eats lunch at noon.', 'She wills not eat lunch at noon.', "She won't eats lunch at noon."],
-    ans: 0,
-    exp: "will not = won't。動詞は原形（eat）のまま変わりません。"
+    ja: '「窓を開けてもらえますか？」',
+    context: '丁寧なお願い',
+    main: 'Will you open the window?',
+    answers: ['Will you open the window','Will you open the window?','Will you please open the window','Will you please open the window?'],
+    speak: 'Will you open the window?',
+    exp: '"Will you open...?" で丁寧にお願いできます。'
   },
   {
-    q: '未来の約束を表す適切な文は？',
-    opts: ['I going to help you.', 'I will help you.', 'I help you tomorrow.', 'I am help you.'],
-    ans: 1,
-    exp: '約束には will が最適です。「必ず〜します」というニュアンスがあります。'
+    ja: '「彼女はきっと成功するでしょう」',
+    context: '期待・予測',
+    main: 'She will succeed.',
+    answers: ['She will succeed','She\'ll succeed','She will succeed.','She\'ll succeed.'],
+    speak: 'She will succeed.',
+    exp: '根拠なしの予測・確信 → will。succeed = 成功する。'
   },
   {
-    q: '"Will they come to the party?" の答えは？',
-    opts: ['Yes, they will.', 'Yes, they wills.', 'Yes, they willing.', 'Yes, they going.'],
-    ans: 0,
-    exp: 'Will を使った疑問文への答えは Yes, 主語 + will. / No, 主語 + won\'t.'
+    ja: '「あなたをずっと愛します」',
+    context: '結婚の誓い・永続的な約束',
+    main: 'I will love you forever.',
+    answers: ['I will love you forever','I\'ll love you forever','I will love you forever.','I\'ll love you forever.','I will always love you','I\'ll always love you'],
+    speak: 'I will love you forever.',
+    exp: '誓い・永続的な約束 → will。forever や always と一緒によく使われます。'
   },
   {
-    q: '"He ___ be home by 8."',
-    opts: ['will', 'wills', 'gonna', 'is will'],
-    ans: 0,
-    exp: 'will + be動詞の原形(be) で未来の状態を表します。'
+    ja: '「彼は明日来ません」',
+    context: '否定の予定',
+    main: 'He won\'t come tomorrow.',
+    answers: ['He won\'t come tomorrow','He won\'t come tomorrow.','He will not come tomorrow','He will not come tomorrow.'],
+    speak: 'He won\'t come tomorrow.',
+    exp: 'won\'t = will not。「〜しないでしょう」という否定の未来です。'
   },
   {
-    q: 'ビジネスメールで使う表現として適切なのは？',
-    opts: ["I'm gonna send the files.", 'I will send the files.', "I'mma send the files.", 'Files gonna be sent.'],
-    ans: 1,
-    exp: 'メールなどの書き言葉・フォーマルな場面では will を使います。'
+    ja: '「私たちは必ず勝ちます！」',
+    context: '強い意志・チームの宣言',
+    main: 'We will win!',
+    answers: ['We will win','We\'ll win','We will win!','We\'ll win!'],
+    speak: 'We will win!',
+    exp: '強い意志・確信の宣言 → will。チームや仲間への鼓舞にも使います。'
   },
   {
-    q: '"We will win!" の日本語は？',
-    opts: ['私たちは勝った！', '私たちは負けるでしょう！', '私たちは勝つでしょう！', '私たちは勝ちたい！'],
-    ans: 2,
-    exp: 'will は未来を表すので「勝つでしょう」「勝てる！」というニュアンスです。'
+    ja: '「精一杯頑張ります」',
+    context: '約束・宣言',
+    main: 'I will do my best.',
+    answers: ['I will do my best','I\'ll do my best','I will do my best.','I\'ll do my best.','I will try my best','I\'ll try my best','I will try my best.'],
+    speak: 'I will do my best.',
+    exp: '"do my best" = 精一杯頑張る。try my best も同じ意味で使えます。'
   },
   {
-    q: '正しい will の疑問文は？',
-    opts: ['Will she comes?', 'Will she come?', 'She will come?', 'Does she will come?'],
-    ans: 1,
-    exp: 'Will + 主語 + 動詞の原形? が正しい疑問文の形です。'
+    ja: '「（今申し出た）荷物を持ちましょうか？」',
+    context: '即座の気遣い',
+    main: 'I\'ll carry that for you.',
+    answers: ['I\'ll carry that for you','I will carry that for you','I\'ll carry that for you.','I will carry that for you.','I\'ll carry that','I will carry that','I\'ll take that for you'],
+    speak: 'I\'ll carry that for you.',
+    exp: '今この場で「持ってあげよう！」と決めた → will。for you で優しさが伝わります。'
   },
   {
-    q: '"I will try my best." と同じ意味の表現は？',
-    opts: ["I'll try my best.", 'I willing try my best.', 'I would tried my best.', 'I going try my best.'],
-    ans: 0,
-    exp: "I'll = I will。I'll try my best. は最もよく使われる自然な表現です！"
-  },
-  // ── 🇯🇵→🇬🇧 翻訳問題 ──
-  {
-    q: '🇯🇵→🇬🇧 日本語を英語にしよう！\n「私は明日勉強します」',
-    opts: ['I will study tomorrow.', 'I gonna study tomorrow.', 'I studying tomorrow.', 'I will studying tomorrow.'],
-    ans: 0,
-    exp: 'will + 動詞の原形。I will study tomorrow. が正解です。',
-    speak: 'I will study tomorrow.'
-  },
-  {
-    q: '🇯🇵→🇬🇧 日本語を英語にしよう！\n「ドアを閉めてもらえますか？」',
-    opts: ['Will you close the door?', 'Are you gonna close the door?', 'Do you will close the door?', 'You will close the door?'],
-    ans: 0,
-    exp: 'Will you...? は「〜してもらえますか？」という丁寧な依頼表現です。',
-    speak: 'Will you close the door?'
-  },
-  {
-    q: '🇯🇵→🇬🇧 日本語を英語にしよう！\n「雨は降らないでしょう」',
-    opts: ["It won't rain.", "It's not gonna rain.", 'It will not rains.', "It doesn't rain."],
-    ans: 0,
-    exp: "will not の短縮形 won't。It won't rain. が正解です。",
-    speak: "It won't rain."
-  },
-  {
-    q: '🇯🇵→🇬🇧 日本語を英語にしよう！\n「私がやります！（今この場で決めた）」',
-    opts: ["I'll do it!", "I'm gonna do it!", 'I do it!', 'I will doing it!'],
-    ans: 0,
-    exp: "今この瞬間に決めた → will。I'll do it! (= I will do it!) が正解。",
-    speak: "I'll do it!"
-  },
-  {
-    q: '🇯🇵→🇬🇧 日本語を英語にしよう！\n「彼女はきっとあなたを助けてくれるでしょう」',
-    opts: ['She will help you.', "She's gonna help you.", 'She will helps you.', 'She helping you.'],
-    ans: 0,
-    exp: '経験からの確信・予測 → will。She will help you. が正解です。',
-    speak: 'She will help you.'
-  },
-  {
-    q: '🇯🇵→🇬🇧 日本語を英語にしよう！\n「私は絶対に嘘をつきません」',
-    opts: ['I will never lie.', "I'm not gonna lie.", "I don't lie.", 'I will not lying.'],
-    ans: 0,
-    exp: '強い意志の誓いには will。I will never lie. が正解です。',
-    speak: 'I will never lie.'
-  },
-  {
-    q: '🇯🇵→🇬🇧 日本語を英語にしよう！\n「バッグを持ちましょうか？（今申し出た）」',
-    opts: ["I'll carry your bag.", "I'm gonna carry your bag.", 'I carry your bag.', 'I will carrying your bag.'],
-    ans: 0,
-    exp: '自発的な申し出 → will。I\'ll carry your bag. が正解です。',
-    speak: "I'll carry your bag."
-  },
-  {
-    q: '🇯🇵→🇬🇧 日本語を英語にしよう！\n「彼らは来週到着するでしょう」',
-    opts: ['They will arrive next week.', "They're gonna arrive next week.", 'They arrive next week.', 'They will arrives next week.'],
-    ans: 0,
-    exp: '未来の予測 → will。They will arrive next week. が正解。',
-    speak: 'They will arrive next week.'
-  },
-  {
-    q: '🇯🇵→🇬🇧 日本語を英語にしよう！\n「あなたはこの映画が気に入るでしょう！」',
-    opts: ['You will love this movie!', "You're gonna love this movie!", 'You loving this movie!', 'You will loving this movie!'],
-    ans: 0,
-    exp: '経験からの確信・予測 → will。You will love this movie! が正解。',
-    speak: 'You will love this movie!'
-  },
-  {
-    q: '🇯🇵→🇬🇧 日本語を英語にしよう！\n「彼は午後3時に来るでしょう」',
-    opts: ['He will come at 3 PM.', "He's gonna come at 3 PM.", 'He comes at 3 PM.', 'He will came at 3 PM.'],
-    ans: 0,
-    exp: '未来の予定（フォーマルに伝える）→ will。He will come at 3 PM. が正解。',
-    speak: 'He will come at 3 PM.'
-  }
-];
-
-const GONNA_QUESTIONS = [
-  {
-    q: '"I\'m gonna eat sushi." の日本語訳は？',
-    opts: ['私は寿司を食べた', '私は寿司が好き', '私は寿司を食べるつもり', '私は寿司を食べたい'],
-    ans: 2,
-    exp: "gonna = going to で「〜するつもり・予定」を表します。"
-  },
-  {
-    q: '"gonna" は何の略？',
-    opts: ['going to', 'gone to', 'got to', 'good to'],
-    ans: 0,
-    exp: 'gonna = going to の短縮形です。カジュアルな会話でよく使います。'
-  },
-  {
-    q: '正しい "gonna" の文は？',
-    opts: ['I gonna eat.', "I'm gonna eat.", 'I am gonna eating.', 'I wanna gonna eat.'],
-    ans: 1,
-    exp: "gonna の前には be動詞（am/is/are）が必要。I'm gonna eat. が正しいです。"
-  },
-  {
-    q: '"She\'s gonna be late." の "She\'s" は何の短縮形？',
-    opts: ['She was', 'She has', 'She is', 'She does'],
-    ans: 2,
-    exp: "She's = She is の短縮形。She is gonna be late. = 彼女は遅れそう。"
-  },
-  {
-    q: '"gonna" を使うのに適切な場面は？',
-    opts: ['ビジネスの会議', '公式のプレゼンテーション', '友達との会話', 'フォーマルなメール'],
-    ans: 2,
-    exp: 'gonna はカジュアルな表現なので、友達との会話やSNSに最適です。'
-  },
-  {
-    q: '( ) に入る正しい語は？ "We\'re ___ watch a movie."',
-    opts: ['will', 'gonna', 'going', 'gon'],
-    ans: 1,
-    exp: "We're gonna watch a movie. = 映画を見る予定！正しい形です。"
-  },
-  {
-    q: '"I\'m gonna call you later." をフォーマルに言うと？',
-    opts: ["I'm gonna phone you later.", 'I will call you later.', 'I calling you later.', "I'll gonna call you later."],
-    ans: 1,
-    exp: 'gonna をフォーマルに言う場合は will を使います。'
-  },
-  {
-    q: '正しい "gonna" の否定文は？',
-    opts: ["I'm not gonna go.", "I'm gonna not go.", "I amn't gonna go.", "I'm no gonna go."],
-    ans: 0,
-    exp: "否定は be動詞の後に not を入れて I'm not gonna go. が正しいです。"
-  },
-  {
-    q: '"It\'s gonna rain." の意味は？',
-    opts: ['雨が降った', '雨が降っている', '雨が降りそう', '雨は降らない'],
-    ans: 2,
-    exp: "gonna = going to で「〜しそう・予定」のニュアンス。雨の気配を感じて使います。"
-  },
-  {
-    q: '"They\'re gonna travel to Europe." で "They\'re" は？',
-    opts: ['They were', 'They are', 'They have', 'They would'],
-    ans: 1,
-    exp: "They're = They are の短縮形。They are gonna travel. が元の形です。"
-  },
-  {
-    q: '"He\'s gonna play soccer." の正しい日本語は？',
-    opts: ['彼はサッカーが好き', '彼はサッカーをした', '彼はサッカーをする予定', '彼はサッカーをしている'],
-    ans: 2,
-    exp: 'gonna は計画・予定を表します。「〜する予定」が正しい訳です。'
-  },
-  {
-    q: '"gonna" の後に来るのは？',
-    opts: ['動詞の原形', '動詞のing形', '動詞の過去形', '動詞のed形'],
-    ans: 0,
-    exp: 'gonna の後は will と同じく動詞の原形（eat, go, playなど）を使います。'
-  },
-  {
-    q: '正しい文はどれ？',
-    opts: ["She's gonna to eat.", "She's gonna eating.", "She's gonna eat.", 'She gonna eat.'],
-    ans: 2,
-    exp: "She's gonna eat. = She is going to eat. が元の形。be動詞は必須！"
-  },
-  {
-    q: '"I\'m gonna try!" の意味は？',
-    opts: ['私はやった！', '私はやってみるつもり！', '私はやりたくない！', '私はやったことがある！'],
-    ans: 1,
-    exp: 'gonna = going to で「〜するつもり・やってみる」というポジティブな意志表明！'
-  },
-  {
-    q: '友達へのメッセージとして自然なのは？',
-    opts: ['I will attend the gathering tomorrow.', "I'm gonna be at the party!", 'I shall be present at the gathering.', 'I am going to attend the party formally.'],
-    ans: 1,
-    exp: "友達へのカジュアルなメッセージには I'm gonna be at the party! が自然です。"
-  },
-  {
-    q: '"We\'re gonna miss the train!" の意味は？',
-    opts: ['電車に乗り遅れた！', '電車が懐かしい！', '電車に乗り遅れそう！', '電車は来ない！'],
-    ans: 2,
-    exp: 'gonna = going to「〜しそう」。miss = 乗り遅れる。緊迫感のある表現！'
-  },
-  {
-    q: '( ) に正しいものは？ "I ___ gonna study."',
-    opts: ['will', "'m", 'is', 'are'],
-    ans: 1,
-    exp: "I'm gonna study. = I am gonna study. 主語 I には am（'m）が必要です。"
-  },
-  {
-    q: '"gonna" が使われている正しい文は？',
-    opts: ["I'm gonna happy.", "I'm gonna be happy.", "I'm gonna happy be.", "I'm be gonna happy."],
-    ans: 1,
-    exp: "be動詞を使った状態を表す場合は I'm gonna be happy. が正しいです。"
-  },
-  {
-    q: '"She\'s gonna make dinner." のフォーマルバージョンは？',
-    opts: ['She gonna make dinner.', 'She will make dinner.', 'She be making dinner.', 'She makes dinner will.'],
-    ans: 1,
-    exp: 'gonna → will に変えると She will make dinner. というフォーマルな表現になります。'
-  },
-  {
-    q: 'SNSの投稿として自然な表現は？',
-    opts: ['I will attend the concert this evening.', "I'm gonna rock this concert! 🎸", 'I shall perform at the concert.', 'The concert will be attended by me.'],
-    ans: 1,
-    exp: "SNSはカジュアルな場所。I'm gonna rock this concert! 🎸 がネイティブっぽくて最高！"
-  },
-  // ── 🇯🇵→🇬🇧 翻訳問題 ──
-  {
-    q: '🇯🇵→🇬🇧 日本語を英語にしよう！\n「今夜外食するつもり」（友達に）',
-    opts: ["I'm gonna eat out tonight.", 'I will eat out tonight.', "I gonna eat out tonight.", 'I eating out tonight.'],
-    ans: 0,
-    exp: "前から決めていたカジュアルな計画 → gonna。I'm gonna eat out tonight. が正解。",
-    speak: "I'm gonna eat out tonight."
-  },
-  {
-    q: '🇯🇵→🇬🇧 日本語を英語にしよう！\n「彼女は来月引っ越す予定」',
-    opts: ["She's gonna move next month.", 'She will move next month.', "She gonna move next month.", 'She moves next month.'],
-    ans: 0,
-    exp: "前から決まっている計画をカジュアルに → gonna。She's gonna move next month. が正解。",
-    speak: "She's gonna move next month."
-  },
-  {
-    q: '🇯🇵→🇬🇧 日本語を英語にしよう！\n「（黒い雲を見て）雨が降りそう！」',
-    opts: ["It's gonna rain!", 'It will rain!', "It gonna rain!", 'It raining!'],
-    ans: 0,
-    exp: "目の前の証拠（黒い雲）があるときは gonna。It's gonna rain! が正解。",
-    speak: "It's gonna rain!"
-  },
-  {
-    q: '🇯🇵→🇬🇧 日本語を英語にしよう！\n「私は諦めないつもり！」',
-    opts: ["I'm not gonna give up!", "I won't give up!", "I'm not gonna gives up!", "I not gonna give up!"],
-    ans: 0,
-    exp: "カジュアルな強い意志 → gonna。I'm not gonna give up! が正解。",
-    speak: "I'm not gonna give up!"
-  },
-  {
-    q: '🇯🇵→🇬🇧 日本語を英語にしよう！\n「私たちは今夜パーティーをする予定」',
-    opts: ["We're gonna have a party tonight.", 'We will have a party tonight.', "We gonna have a party tonight.", "We're gonna has a party tonight."],
-    ans: 0,
-    exp: "前から計画したことをカジュアルに → gonna。We're gonna have a party tonight. が正解。",
-    speak: "We're gonna have a party tonight."
-  },
-  {
-    q: '🇯🇵→🇬🇧 日本語を英語にしよう！\n「彼はゲームをする予定」',
-    opts: ["He's gonna play games.", 'He will play games.', "He gonna play games.", "He's gonna plays games."],
-    ans: 0,
-    exp: "計画をカジュアルに表現 → gonna。He's gonna play games. が正解。",
-    speak: "He's gonna play games."
-  },
-  {
-    q: '🇯🇵→🇬🇧 日本語を英語にしよう！\n「明日ジムに行くつもり！」（友達への投稿）',
-    opts: ["I'm gonna go to the gym tomorrow!", 'I will go to the gym tomorrow!', "I gonna go to the gym tomorrow!", "I'm gonna goes to the gym tomorrow!"],
-    ans: 0,
-    exp: "カジュアルな計画の投稿 → gonna。I'm gonna go to the gym tomorrow! が正解。",
-    speak: "I'm gonna go to the gym tomorrow!"
-  },
-  {
-    q: '🇯🇵→🇬🇧 日本語を英語にしよう！\n「これは最高になりそう！」',
-    opts: ["It's gonna be amazing!", 'It will be amazing!', "It gonna be amazing!", "It's gonna amazing!"],
-    ans: 0,
-    exp: "盛り上がりや期待感をカジュアルに → gonna。It's gonna be amazing! が正解。",
-    speak: "It's gonna be amazing!"
-  },
-  {
-    q: '🇯🇵→🇬🇧 日本語を英語にしよう！\n「彼らは来月日本に来る予定」',
-    opts: ["They're gonna come to Japan next month.", 'They will come to Japan next month.', "They gonna come to Japan next month.", "They're gonna comes to Japan next month."],
-    ans: 0,
-    exp: "前から決まっている旅行の計画 → gonna。They're gonna come to Japan next month. が正解。",
-    speak: "They're gonna come to Japan next month."
-  },
-  {
-    q: '🇯🇵→🇬🇧 日本語を英語にしよう！\n「彼女は今夜夕食を作る予定」',
-    opts: ["She's gonna cook dinner tonight.", 'She will cook dinner tonight.', "She gonna cook dinner tonight.", "She's gonna cooking dinner tonight."],
-    ans: 0,
-    exp: "前から決まっている計画 → gonna。She's gonna cook dinner tonight. が正解。",
-    speak: "She's gonna cook dinner tonight."
+    ja: '「あなたはここが気に入るでしょう！」',
+    context: '経験からの確信',
+    main: 'You will love it here!',
+    answers: ['You will love it here','You\'ll love it here','You will love it here!','You\'ll love it here!','You will love this place','You\'ll love this place'],
+    speak: 'You will love it here!',
+    exp: '「きっと気に入るよ！」という確信を伝える will。here = ここで / this place = この場所。'
   }
 ];
 
 // =========================================================
-// MIXED QUESTIONS
+// GONNA QUESTIONS  (翻訳形式 20問)
+// =========================================================
+const GONNA_QUESTIONS = [
+  {
+    ja: '「今夜、外食するつもり」',
+    context: '友達へのカジュアルな報告',
+    main: 'I\'m gonna eat out tonight.',
+    answers: ['I\'m gonna eat out tonight','I\'m gonna eat out tonight.','I am gonna eat out tonight','I\'m going to eat out tonight'],
+    speak: 'I\'m gonna eat out tonight.',
+    exp: '"gonna" = "going to" のカジュアルな形。前から決めていた計画を友達に話すとき自然です。'
+  },
+  {
+    ja: '「彼女は来月、引っ越す予定」',
+    context: '前から決まっている計画',
+    main: 'She\'s gonna move next month.',
+    answers: ['She\'s gonna move next month','She\'s gonna move next month.','She is gonna move next month','She\'s going to move next month'],
+    speak: 'She\'s gonna move next month.',
+    exp: '"She\'s gonna" = "She is going to"。前から決まっている予定をカジュアルに伝えます。'
+  },
+  {
+    ja: '「（黒い雲！）雨が降りそう！」',
+    context: '目の前の証拠から予測',
+    main: 'It\'s gonna rain!',
+    answers: ['It\'s gonna rain','It\'s gonna rain!','It is gonna rain','It\'s going to rain','It\'s going to rain!'],
+    speak: 'It\'s gonna rain!',
+    exp: '目の前に黒い雲という証拠がある → gonna。will だと「データから予測」になりニュアンスが違います。'
+  },
+  {
+    ja: '「私は諦めないつもり！」',
+    context: 'カジュアルな強い意志',
+    main: 'I\'m not gonna give up!',
+    answers: ['I\'m not gonna give up','I\'m not gonna give up!','I am not gonna give up','I\'m not going to give up'],
+    speak: 'I\'m not gonna give up!',
+    exp: '"not gonna" = "not going to"。カジュアルな否定の意志。SNSや友達との会話でよく使います。'
+  },
+  {
+    ja: '「今夜、パーティーをする予定！」',
+    context: '前から計画していた催し',
+    main: 'We\'re gonna have a party tonight.',
+    answers: ['We\'re gonna have a party tonight','We\'re gonna have a party tonight.','We are gonna have a party tonight','We\'re going to have a party tonight'],
+    speak: 'We\'re gonna have a party tonight.',
+    exp: '"We\'re gonna" = "We are going to"。前から計画していたことをカジュアルに！'
+  },
+  {
+    ja: '「彼はゲームをする予定」',
+    context: 'カジュアルな計画の共有',
+    main: 'He\'s gonna play games.',
+    answers: ['He\'s gonna play games','He\'s gonna play games.','He is gonna play games','He\'s going to play games'],
+    speak: 'He\'s gonna play games.',
+    exp: '"He\'s gonna" = "He is going to"。3人称単数でも gonna は変わりません。'
+  },
+  {
+    ja: '「明日、ジムに行くつもり！」',
+    context: 'カジュアルな決意（SNS）',
+    main: 'I\'m gonna go to the gym tomorrow!',
+    answers: ['I\'m gonna go to the gym tomorrow','I\'m gonna go to the gym tomorrow!','I am gonna go to the gym tomorrow','I\'m going to go to the gym tomorrow'],
+    speak: 'I\'m gonna go to the gym tomorrow!',
+    exp: '"gonna go" の後は動詞の原形。ジムに行く計画をカジュアルに宣言するときの定番！'
+  },
+  {
+    ja: '「これは最高になりそう！」',
+    context: '期待感・盛り上がり（SNS）',
+    main: 'It\'s gonna be amazing!',
+    answers: ['It\'s gonna be amazing','It\'s gonna be amazing!','It is gonna be amazing','It\'s going to be amazing','It\'s gonna be great','It\'s gonna be awesome'],
+    speak: 'It\'s gonna be amazing!',
+    exp: '"gonna be" で未来の状態を表します。be動詞の原形(be)を忘れずに！'
+  },
+  {
+    ja: '「彼らは日本に来る予定」',
+    context: '前から決まっている旅行計画',
+    main: 'They\'re gonna come to Japan.',
+    answers: ['They\'re gonna come to Japan','They\'re gonna come to Japan.','They are gonna come to Japan','They\'re going to come to Japan','They\'re gonna visit Japan'],
+    speak: 'They\'re gonna come to Japan.',
+    exp: '"They\'re gonna" = "They are going to"。前から計画している旅行の予定です。'
+  },
+  {
+    ja: '「彼女は今夜、夕食を作る予定」',
+    context: '家での計画',
+    main: 'She\'s gonna cook dinner tonight.',
+    answers: ['She\'s gonna cook dinner tonight','She\'s gonna cook dinner tonight.','She is gonna cook dinner tonight','She\'s going to cook dinner tonight','She\'s gonna make dinner tonight'],
+    speak: 'She\'s gonna cook dinner tonight.',
+    exp: '"cook" も "make" も「料理する・作る」という意味で使えます。どちらも正解！'
+  },
+  {
+    ja: '「電車に乗り遅れそう！」',
+    context: '今まさに起きている緊急事態',
+    main: 'We\'re gonna miss the train!',
+    answers: ['We\'re gonna miss the train','We\'re gonna miss the train!','We are gonna miss the train','We\'re going to miss the train'],
+    speak: 'We\'re gonna miss the train!',
+    exp: '"miss the train" = 電車に乗り遅れる。今まさに起きている状況 → gonna！'
+  },
+  {
+    ja: '「彼は具合が悪くなりそう...」',
+    context: '顔色を見ての予測（証拠あり）',
+    main: 'He\'s gonna be sick.',
+    answers: ['He\'s gonna be sick','He\'s gonna be sick.','He is gonna be sick','He\'s going to be sick','He\'s gonna get sick'],
+    speak: 'He\'s gonna be sick.',
+    exp: '顔色という目の前の証拠から予測 → gonna。"get sick" も「具合が悪くなる」で使えます。'
+  },
+  {
+    ja: '「今夜、映画を見る予定！」',
+    context: '友達との計画',
+    main: 'We\'re gonna watch a movie tonight.',
+    answers: ['We\'re gonna watch a movie tonight','We\'re gonna watch a movie tonight.','We are gonna watch a movie tonight','We\'re going to watch a movie tonight'],
+    speak: 'We\'re gonna watch a movie tonight.',
+    exp: '"watch a movie" = 映画を見る。前から決めていた友達との計画 → gonna。'
+  },
+  {
+    ja: '「（ライブ前・SNS）最高のショーにするぞ！」',
+    context: 'カジュアルな意気込み',
+    main: 'I\'m gonna put on the best show!',
+    answers: ['I\'m gonna put on the best show','I\'m gonna put on the best show!','I am gonna put on the best show','I\'m going to put on the best show'],
+    speak: 'I\'m gonna put on the best show!',
+    exp: '"put on a show" = ショーをやる・披露する。SNSや友達への熱い宣言にぴったり！'
+  },
+  {
+    ja: '「（子供が！）転びそう！」',
+    context: '今まさに見えている状況',
+    main: 'She\'s gonna fall!',
+    answers: ['She\'s gonna fall','She\'s gonna fall!','She is gonna fall','She\'s going to fall'],
+    speak: 'She\'s gonna fall!',
+    exp: '今まさに目の前で起きていること（証拠あり）→ gonna！'
+  },
+  {
+    ja: '「来月、旅行する予定」',
+    context: '前から計画している旅行',
+    main: 'I\'m gonna travel next month.',
+    answers: ['I\'m gonna travel next month','I\'m gonna travel next month.','I am gonna travel next month','I\'m going to travel next month'],
+    speak: 'I\'m gonna travel next month.',
+    exp: '前から決まっている旅行の計画 → gonna。travel = 旅行する。'
+  },
+  {
+    ja: '「今夜、全力で楽しむぞ！」',
+    context: 'お出かけ前の盛り上がり（SNS）',
+    main: 'I\'m gonna have so much fun tonight!',
+    answers: ['I\'m gonna have so much fun tonight','I\'m gonna have so much fun tonight!','I am gonna have so much fun tonight','I\'m going to have so much fun tonight','I\'m gonna have a great time tonight'],
+    speak: 'I\'m gonna have so much fun tonight!',
+    exp: '"have so much fun" = 超楽しむ。"have a great time" も同じ意味で使えます！'
+  },
+  {
+    ja: '「彼女は医者になるつもり」',
+    context: '将来の夢・目標（カジュアル）',
+    main: 'She\'s gonna be a doctor.',
+    answers: ['She\'s gonna be a doctor','She\'s gonna be a doctor.','She is gonna be a doctor','She\'s going to be a doctor'],
+    speak: 'She\'s gonna be a doctor.',
+    exp: '"gonna be" + 職業で将来なりたいものを表せます。'
+  },
+  {
+    ja: '「絶対勝つぞ！（ゲーム・試合前に）」',
+    context: 'カジュアルな勝利宣言',
+    main: 'I\'m gonna win!',
+    answers: ['I\'m gonna win','I\'m gonna win!','I am gonna win','I\'m going to win','I\'m gonna win this','I\'m gonna win this!'],
+    speak: 'I\'m gonna win!',
+    exp: 'カジュアルな勝利宣言 → gonna。"this" を付けて "I\'m gonna win this!" とするとさらに強調できます！'
+  },
+  {
+    ja: '「今日中に終わらせるつもり」',
+    context: 'カジュアルな決意（仕事・勉強）',
+    main: 'I\'m gonna finish it today.',
+    answers: ['I\'m gonna finish it today','I\'m gonna finish it today.','I am gonna finish it today','I\'m going to finish it today','I\'m gonna finish this today'],
+    speak: 'I\'m gonna finish it today.',
+    exp: '今日やり遂げるというカジュアルな意志 → gonna。"it" は課題・仕事などを指します。'
+  }
+];
+
+// =========================================================
+// MIXED QUESTIONS  (翻訳形式 20問)
 // =========================================================
 const MIXED_QUESTIONS = [
   {
-    q: '📌 電話が突然鳴った！\n「私が出る！」— 正しい英文は？',
-    opts: ["I'll get it!", "I'm gonna get it!", 'I get it!', 'I will getting it!'],
-    ans: 0,
-    exp: "今この瞬間に決めた → will。I'll get it! (= I will get it!) が自然です。",
-    speak: "I'll get it!"
+    ja: '「（今この瞬間）私が払います！」',
+    context: 'レストランでの自発的な申し出',
+    hint: 'will か gonna か？',
+    main: 'I\'ll pay!',
+    answers: ['I\'ll pay','I\'ll pay!','I will pay','I will pay!','I\'ll pay for it','I will pay for it'],
+    speak: 'I\'ll pay!',
+    exp: '今この場で「払おう！」と決めた → will。I\'ll = I will の短縮形。'
   },
   {
-    q: '📌 前から計画していた旅行。友達に話すとき\n「来月、沖縄に行く予定！」',
-    opts: ['I will go to Okinawa next month!', "I'm gonna go to Okinawa next month!", "I going to Okinawa!", 'I gonna go Okinawa next month!'],
-    ans: 1,
-    exp: "前から計画していた → gonna。I'm gonna go to Okinawa next month! が正解。",
-    speak: "I'm gonna go to Okinawa next month!"
+    ja: '「（前から計画）来週、東京に行く予定！」',
+    context: '友達へのカジュアルな旅行報告',
+    hint: 'will か gonna か？',
+    main: 'I\'m gonna go to Tokyo next week!',
+    answers: ['I\'m gonna go to Tokyo next week','I\'m gonna go to Tokyo next week!','I am gonna go to Tokyo next week','I\'m going to go to Tokyo next week','I\'m gonna visit Tokyo next week'],
+    speak: 'I\'m gonna go to Tokyo next week!',
+    exp: '前から計画していた旅行をカジュアルに伝える → gonna。'
   },
   {
-    q: '📌 空を見上げると黒い雲がいっぱい！\n「雨が降りそう！」と言うとき？',
-    opts: ['It will rain!', "It's gonna rain!", "It gonna rain!", 'It raining soon!'],
-    ans: 1,
-    exp: "目の前に証拠（黒い雲）がある → gonna。It's gonna rain! が正解。",
-    speak: "It's gonna rain!"
+    ja: '「（黒い雲！）嵐になりそう！」',
+    context: '空を見て今感じた（証拠あり）',
+    hint: 'will か gonna か？',
+    main: 'It\'s gonna be a storm!',
+    answers: ['It\'s gonna be a storm','It\'s gonna be a storm!','It is gonna be a storm','It\'s going to be a storm','It\'s gonna storm'],
+    speak: 'It\'s gonna be a storm!',
+    exp: '目の前に黒い雲という証拠がある → gonna。'
   },
   {
-    q: '📌 ビジネスメールで上司に報告\n「月曜日までに資料を送ります」',
-    opts: ["I'm gonna send the document by Monday.", 'I will send the document by Monday.', "I sending document by Monday.", "I'll gonna send it by Monday."],
-    ans: 1,
-    exp: "フォーマルな約束・メール → will。I will send the document by Monday. が正解。",
-    speak: "I will send the document by Monday."
+    ja: '「（ビジネスメール）月曜日に送ります」',
+    context: 'フォーマルな約束・書き言葉',
+    hint: 'will か gonna か？',
+    main: 'I will send it on Monday.',
+    answers: ['I will send it on Monday','I will send it on Monday.','I\'ll send it on Monday','I\'ll send it on Monday.'],
+    speak: 'I will send it on Monday.',
+    exp: 'ビジネスメールなどフォーマルな場面では gonna ではなく will を使います。'
   },
   {
-    q: '📌 重い荷物を持っている人を見てすぐ申し出る\n「持ちましょうか！」',
-    opts: ["I'm gonna carry that!", "I'll carry that for you!", "I carry that!", 'I will carrying that!'],
-    ans: 1,
-    exp: "今この瞬間に「助けよう！」と決めた → will。I'll carry that for you! が正解。",
-    speak: "I'll carry that for you!"
+    ja: '「（今すぐ申し出た）手伝いましょうか！」',
+    context: '今決めた気遣いの申し出',
+    hint: 'will か gonna か？',
+    main: 'I\'ll help you!',
+    answers: ['I\'ll help you','I\'ll help you!','I will help you','I will help you!'],
+    speak: 'I\'ll help you!',
+    exp: '今この場で「手伝おう！」と決めた → will。'
   },
   {
-    q: '📌 友達と話していて（前から決めていた）\n「今週末キャンプに行く予定！」',
-    opts: ['I will go camping this weekend!', "I'm gonna go camping this weekend!", 'I going camping this weekend!', 'I gonna camping this weekend!'],
-    ans: 1,
-    exp: "前から計画していたことをカジュアルに → gonna。I'm gonna go camping this weekend! が正解。",
-    speak: "I'm gonna go camping this weekend!"
+    ja: '「（前から計画）来月、ジムに入会するつもり」',
+    context: '友達へのカジュアルな計画共有',
+    hint: 'will か gonna か？',
+    main: 'I\'m gonna join the gym next month.',
+    answers: ['I\'m gonna join the gym next month','I\'m gonna join the gym next month.','I am gonna join the gym next month','I\'m going to join the gym next month'],
+    speak: 'I\'m gonna join the gym next month.',
+    exp: '前から決めていた計画をカジュアルに → gonna。'
   },
   {
-    q: '📌 友達の顔色がとても悪い。見て思った\n「具合悪くなりそう...」',
-    opts: ['He will be sick.', "He's gonna be sick.", 'He sick now.', 'He will being sick.'],
-    ans: 1,
-    exp: "顔色という「目の前の証拠」があるから → gonna。He's gonna be sick. が正解。",
-    speak: "He's gonna be sick."
+    ja: '「（車が突っ込んでくる！）ぶつかるぞ！」',
+    context: '緊迫した状況（今まさに）',
+    hint: 'will か gonna か？',
+    main: 'It\'s gonna crash!',
+    answers: ['It\'s gonna crash','It\'s gonna crash!','It is gonna crash','It\'s going to crash'],
+    speak: 'It\'s gonna crash!',
+    exp: '今まさに目の前で起きている危険な状況（証拠あり）→ gonna！'
   },
   {
-    q: '📌 結婚式の誓いの言葉として正しいのは？',
-    opts: ["I'm gonna love you forever.", 'I will love you forever.', 'I loving you forever.', 'I gonna love you always.'],
-    ans: 1,
-    exp: "公式な誓い・フォーマルな約束 → will。I will love you forever. が正解。",
-    speak: "I will love you forever."
+    ja: '「（プレゼン）来年の売上は増えるでしょう」',
+    context: 'ビジネスのフォーマルな予測発表',
+    hint: 'will か gonna か？',
+    main: 'Sales will increase next year.',
+    answers: ['Sales will increase next year','Sales will increase next year.','Sales will go up next year','Sales will go up next year.'],
+    speak: 'Sales will increase next year.',
+    exp: 'フォーマルなプレゼン・データに基づく予測 → will。'
   },
   {
-    q: '📌 荷物を持った人に丁寧にドアを開けてほしい\n「ドアを開けてもらえますか？」',
-    opts: ["Are you gonna open the door?", 'Will you open the door?', 'You open the door?', 'Gonna open the door?'],
-    ans: 1,
-    exp: "丁寧な依頼・お願い → Will you...? が自然です。",
-    speak: "Will you open the door?"
+    ja: '「（メニューを見て今決めた）ラテにします！」',
+    context: 'カフェで注文（今この瞬間に決めた）',
+    hint: 'will か gonna か？',
+    main: 'I\'ll have a latte!',
+    answers: ['I\'ll have a latte','I\'ll have a latte!','I will have a latte','I will have a latte!','I\'ll take a latte'],
+    speak: 'I\'ll have a latte!',
+    exp: 'メニューを見て今この瞬間に決めた → will。I\'ll have... は注文の定番フレーズ！'
   },
   {
-    q: '📌 Instagramに投稿！\n「今夜最高に楽しむぞ！🎉」',
-    opts: ['I will have an amazing time tonight!', "I'm gonna have an amazing time tonight! 🎉", 'I amazing time tonight!', 'I gonna amazing tonight!'],
-    ans: 1,
-    exp: "SNS・カジュアル・盛り上がり → gonna。I'm gonna have an amazing time tonight! が正解。",
-    speak: "I'm gonna have an amazing time tonight!"
+    ja: '「（試合前・SNS）絶対勝つぞ！」',
+    context: 'カジュアルな宣言・SNS投稿',
+    hint: 'will か gonna か？',
+    main: 'I\'m gonna win this!',
+    answers: ['I\'m gonna win this','I\'m gonna win this!','I am gonna win this','I\'m going to win this'],
+    speak: 'I\'m gonna win this!',
+    exp: 'カジュアルなSNS投稿・友達への盛り上がり宣言 → gonna。'
   },
   {
-    q: '📌 電車がもうすぐ出発しそう！ホームで\n「（今まさに）電車が出る！急いで！」',
-    opts: ['The train will leave! Hurry!', "The train's gonna leave! Hurry!", 'The train leaving! Hurry!', 'The train gonna leave! Hurry!'],
-    ans: 1,
-    exp: "今まさに起きていること（証拠あり）→ gonna。The train's gonna leave! が正解。",
-    speak: "The train's gonna leave! Hurry!"
+    ja: '「（就職面接）大学院に進学します」',
+    context: 'フォーマルな将来の計画発表',
+    hint: 'will か gonna か？',
+    main: 'I will attend graduate school.',
+    answers: ['I will attend graduate school','I will attend graduate school.','I\'ll attend graduate school','I\'ll attend graduate school.'],
+    speak: 'I will attend graduate school.',
+    exp: '面接などフォーマルな場面では gonna ではなく will を使います。'
   },
   {
-    q: '📌 会社のプレゼンで来年の予測を報告\n「来年の売上は20%増えるでしょう」',
-    opts: ["Sales are gonna increase 20% next year.", 'Sales will increase 20% next year.', 'Sales increasing 20% next year.', 'Sales gonna increase 20% next year.'],
-    ans: 1,
-    exp: "フォーマルなプレゼン・データに基づく予測 → will。Sales will increase 20% next year. が正解。",
-    speak: "Sales will increase 20% next year."
+    ja: '「（今まさに！）電車が出るぞ！急いで！」',
+    context: 'ホームで電車が今まさに発車しそう',
+    hint: 'will か gonna か？',
+    main: 'The train\'s gonna leave! Hurry!',
+    answers: ['The train\'s gonna leave hurry','The train\'s gonna leave! Hurry!','The train is gonna leave! Hurry!','The train\'s going to leave! Hurry!'],
+    speak: 'The train\'s gonna leave! Hurry!',
+    exp: '電車がまさに出発しようとしている（証拠あり）→ gonna！'
   },
   {
-    q: '📌 カフェでメニューを見て今決めた\n「えっと、ラテにします！」',
-    opts: ["I'm gonna have a latte.", "I'll have a latte!", 'I having a latte.', 'I gonna have a latte.'],
-    ans: 1,
-    exp: "メニューを見て今この瞬間に決めた → will。I'll have a latte! が自然です。",
-    speak: "I'll have a latte!"
+    ja: '「（丁寧に）ドアを開けてもらえますか？」',
+    context: '礼儀正しいお願い',
+    hint: 'will か gonna か？',
+    main: 'Will you open the door?',
+    answers: ['Will you open the door','Will you open the door?','Will you please open the door','Will you please open the door?'],
+    speak: 'Will you open the door?',
+    exp: '"Will you...?" は丁寧なお願いの定番表現。gonna では使いません。'
   },
   {
-    q: '📌 ゲームの前に友達に宣言！（カジュアル）\n「絶対に勝つぞ！」',
-    opts: ['I will win for sure!', "I'm gonna win this!", 'I winning this game!', "I'll gonna win!"],
-    ans: 1,
-    exp: "カジュアルな意気込み・盛り上がり → gonna。I'm gonna win this! が自然です。",
-    speak: "I'm gonna win this!"
+    ja: '「（友達に・前から計画）今週末キャンプする予定！」',
+    context: '前から決まっているアウトドア計画',
+    hint: 'will か gonna か？',
+    main: 'I\'m gonna go camping this weekend!',
+    answers: ['I\'m gonna go camping this weekend','I\'m gonna go camping this weekend!','I am gonna go camping this weekend','I\'m going to go camping this weekend'],
+    speak: 'I\'m gonna go camping this weekend!',
+    exp: '前から計画していたことをカジュアルに友達に → gonna。'
   },
   {
-    q: '📌 就職面接で将来の計画を答える\n「大学院に進学します」',
-    opts: ["I'm gonna go to graduate school.", 'I will attend graduate school.', 'I going to graduate school.', "I'll gonna study more."],
-    ans: 1,
-    exp: "面接などフォーマルな場面では will。I will attend graduate school. が正解。",
-    speak: "I will attend graduate school."
+    ja: '「（誓い）あなたをずっと守ります」',
+    context: '強い誓い・約束',
+    hint: 'will か gonna か？',
+    main: 'I will protect you forever.',
+    answers: ['I will protect you forever','I will protect you forever.','I\'ll protect you forever','I\'ll protect you forever.','I will always protect you'],
+    speak: 'I will protect you forever.',
+    exp: '正式な誓いや約束 → will。gonna では軽すぎてカジュアルになってしまいます。'
   },
   {
-    q: '📌 子供が今まさに転びそう！\n「あ！転びそう！」',
-    opts: ['She will fall!', "She's gonna fall!", 'She falling!', 'She gonna falls!'],
-    ans: 1,
-    exp: "今まさに起きている状況（証拠あり）→ gonna。She's gonna fall! が正解。",
-    speak: "She's gonna fall!"
+    ja: '「（子供が！）危ない！転ぶぞ！」',
+    context: '今まさに起きている危険（証拠あり）',
+    hint: 'will か gonna か？',
+    main: 'She\'s gonna fall!',
+    answers: ['She\'s gonna fall','She\'s gonna fall!','She is gonna fall','She\'s going to fall'],
+    speak: 'She\'s gonna fall!',
+    exp: '今まさに転びそうな状況が見えている（証拠あり）→ gonna！'
   },
   {
-    q: '📌 病院の受付でフォーマルに伝える\n「3時に先生がいらっしゃいます」',
-    opts: ["The doctor's gonna be here at 3.", 'The doctor will be here at 3.', "Doctor's here at 3.", 'The doctor gonna be here at 3.'],
-    ans: 1,
-    exp: "フォーマルな伝達・予定通知 → will。The doctor will be here at 3. が正解。",
-    speak: "The doctor will be here at 3."
+    ja: '「（今すぐ）窓を開けますね！」',
+    context: '今この場で申し出た',
+    hint: 'will か gonna か？',
+    main: 'I\'ll open the window!',
+    answers: ['I\'ll open the window','I\'ll open the window!','I will open the window','I will open the window!'],
+    speak: 'I\'ll open the window!',
+    exp: '今この場で「開けよう」と決めた → will。'
   },
   {
-    q: '📌 ライブ前にSNS投稿！\n「最高のショーにするぞ！🎸」',
-    opts: ['I will put on the best show!', "I'm gonna put on the best show! 🎸", "I'm gonna puts on the best show!", 'I best show gonna!'],
-    ans: 1,
-    exp: "SNS・カジュアル・熱い意気込み → gonna。I'm gonna put on the best show! 🎸 が正解。",
-    speak: "I'm gonna put on the best show!"
+    ja: '「（友達に）来年、中国語を勉強するつもり」',
+    context: '来年の計画（前から決めている）',
+    hint: 'will か gonna か？',
+    main: 'I\'m gonna study Chinese next year.',
+    answers: ['I\'m gonna study Chinese next year','I\'m gonna study Chinese next year.','I am gonna study Chinese next year','I\'m going to study Chinese next year'],
+    speak: 'I\'m gonna study Chinese next year.',
+    exp: '前から決めている長期計画をカジュアルに → gonna。'
   },
   {
-    q: '📌 誰かが「助けてほしい」と言ってきた。即座に\n「もちろん、手伝いますよ！」',
-    opts: ["I'm gonna help you!", "I'll help you!", 'I helping you!', 'I gonna help!'],
-    ans: 1,
-    exp: "その場で即座に決めた申し出 → will。I'll help you! が自然です。",
-    speak: "I'll help you!"
+    ja: '「（スピーチ）チームは必ず成功するでしょう」',
+    context: '公式のスピーチ・フォーマル',
+    hint: 'will か gonna か？',
+    main: 'The team will succeed.',
+    answers: ['The team will succeed','The team will succeed.'],
+    speak: 'The team will succeed.',
+    exp: '公式なスピーチ・プレゼン → will。gonna はカジュアルすぎます。'
   },
   {
-    q: '📌 友達に「週末どうする？」と聞かれた。前から計画済み\n「土曜日は友達の家でゲームする予定！」',
-    opts: ["I will play games at my friend's place on Saturday!", "I'm gonna play games at my friend's place on Saturday!", 'I games Saturday.', "I gonna games my friend's!"],
-    ans: 1,
-    exp: "前から決まっていた予定をカジュアルに → gonna。I'm gonna play games at my friend's place! が正解。",
-    speak: "I'm gonna play games at my friend's place on Saturday!"
+    ja: '「（SNS）最高の誕生日になりそう！🎂」',
+    context: 'SNS投稿・カジュアルな予感',
+    hint: 'will か gonna か？',
+    main: 'It\'s gonna be the best birthday ever!',
+    answers: ['It\'s gonna be the best birthday ever','It\'s gonna be the best birthday ever!','It is gonna be the best birthday ever','It\'s going to be the best birthday ever'],
+    speak: 'It\'s gonna be the best birthday ever!',
+    exp: 'SNSのカジュアルな盛り上がり投稿 → gonna。'
   }
 ];
 
@@ -2436,6 +2582,26 @@ function getQuestions(type) {
   return MIXED_QUESTIONS;
 }
 
+function normalizeAns(s) {
+  return s.toLowerCase().trim()
+    .replace(/[.!?,;:]/g, '')
+    .replace(/\s+/g, ' ')
+    .replace(/\bi'll\b/g, 'i will').replace(/\bshe'll\b/g, 'she will')
+    .replace(/\bhe'll\b/g, 'he will').replace(/\bwe'll\b/g, 'we will')
+    .replace(/\bthey'll\b/g, 'they will').replace(/\byou'll\b/g, 'you will')
+    .replace(/\bit'll\b/g, 'it will').replace(/\btrain's\b/g, 'train is')
+    .replace(/\bwon't\b/g, 'will not')
+    .replace(/\bi'm\b/g, 'i am').replace(/\bshe's\b/g, 'she is')
+    .replace(/\bhe's\b/g, 'he is').replace(/\bwe're\b/g, 'we are')
+    .replace(/\bthey're\b/g, 'they are').replace(/\bit's\b/g, 'it is')
+    .trim();
+}
+
+function isCorrectAnswer(userInput, answers) {
+  const n = normalizeAns(userInput);
+  return answers.some(a => normalizeAns(a) === n);
+}
+
 // =========================================================
 // TAB SWITCHING
 // =========================================================
@@ -2450,23 +2616,31 @@ function switchTab(tab) {
 }
 
 // =========================================================
-// SPEAK (発音)
+// SPEAK
 // =========================================================
-function speakQuestion(type, qIdx) {
-  const q = getQuestions(type)[qIdx];
-  const text = q.speak || q.opts[q.ans];
+function speakText(text, btnId) {
   if (!text || !/[a-zA-Z]/.test(text)) return;
   window.speechSynthesis.cancel();
   const utt = new SpeechSynthesisUtterance(text);
-  utt.lang = 'en-US';
-  utt.rate = 0.85;
-  utt.pitch = 1;
-  const btn = document.getElementById(type + '-speak-' + qIdx);
-  if (btn) {
-    btn.classList.add('speaking');
-    utt.onend = () => btn.classList.remove('speaking');
+  utt.lang = 'en-US'; utt.rate = 0.82; utt.pitch = 1;
+  if (btnId) {
+    const btn = document.getElementById(btnId);
+    if (btn) {
+      btn.classList.add('speaking');
+      utt.onend = () => btn.classList.remove('speaking');
+    }
   }
   window.speechSynthesis.speak(utt);
+}
+
+function speakQ(type, qIdx) {
+  const q = getQuestions(type)[qIdx];
+  speakText(q.speak, type + '-speak-' + qIdx);
+}
+
+function speakQAfter(type, qIdx) {
+  const q = getQuestions(type)[qIdx];
+  speakText(q.speak, type + '-speak-after-' + qIdx);
 }
 
 // =========================================================
@@ -2475,39 +2649,54 @@ function speakQuestion(type, qIdx) {
 function renderQuiz(type) {
   const questions = getQuestions(type);
   const total = questions.length;
-  const area = document.getElementById(type + '-quiz-area');
+  const area   = document.getElementById(type + '-quiz-area');
   const result = document.getElementById(type + '-result');
   area.innerHTML = '';
   result.classList.remove('show');
   result.innerHTML = '';
+
+  const revealClass = type === 'will' ? '' : type === 'gonna' ? 'gonna-reveal' : 'mix-reveal';
 
   questions.forEach((q, i) => {
     const card = document.createElement('div');
     card.className = 'q-card' + (i === 0 ? ' active' : '');
     card.id = type + '-q-' + i;
 
-    const labels = ['A', 'B', 'C', 'D'];
-    const opts = q.opts.map((o, j) => `
-      <button class="option-btn" onclick="answerQuestion('${type}', ${i}, ${j})" id="${type}-opt-${i}-${j}">
-        <span class="opt-label">${labels[j]}</span>
-        <span class="opt-text">${o}</span>
-      </button>
-    `).join('');
-
     card.innerHTML = `
       <div class="q-card-header">
         <div class="q-num-badge">問題 ${i + 1} / ${total}</div>
-        <button class="speak-btn" id="${type}-speak-${i}" onclick="speakQuestion('${type}', ${i})">🔊 発音を聞く</button>
+        <button class="speak-btn" id="${type}-speak-${i}" onclick="speakQ('${type}', ${i})">🔊 ヒント（答えを聞く）</button>
       </div>
-      <div class="q-text">${q.q.replace(/\n/g, '<br>')}</div>
-      <div class="options-grid">${opts}</div>
+      ${q.context ? `<span class="q-context-tag">📌 ${q.context}</span>` : ''}
+      ${q.hint    ? `<span class="q-hint-tag">💡 ${q.hint}</span>` : ''}
+      <div class="q-japanese">${q.ja}</div>
+      <div class="translate-wrap">
+        <input
+          type="text"
+          class="translate-input"
+          id="${type}-input-${i}"
+          placeholder="英語で書いてみよう！ (Enter でも答えられます)"
+          autocomplete="off" autocorrect="off" spellcheck="false"
+          onkeydown="if(event.key==='Enter')submitAnswer('${type}',${i})"
+        />
+        <button class="submit-btn" id="${type}-submit-${i}" onclick="submitAnswer('${type}',${i})">答える ✏️</button>
+      </div>
       <div class="q-feedback" id="${type}-fb-${i}">
-        <span class="fb-icon"></span>
-        <div><div class="fb-main"></div><div class="fb-explanation"></div></div>
+        <div class="fb-result-badge" id="${type}-badge-${i}"></div>
+        <div class="correct-answer-box ${revealClass}">
+          <div class="correct-label">✅ 正解の英文</div>
+          <div class="user-answer-row" id="${type}-user-row-${i}">
+            <span class="user-label">あなたの答え：</span>
+            <span class="user-text" id="${type}-user-ans-${i}"></span>
+          </div>
+          <div class="correct-en-main" id="${type}-correct-${i}"></div>
+          <button class="speak-after-btn" id="${type}-speak-after-${i}" onclick="speakQAfter('${type}',${i})">🔊 発音を聞く</button>
+        </div>
+        <div class="q-explanation-box" id="${type}-exp-${i}"></div>
       </div>
       <div class="q-actions">
-        <button class="prev-btn ${i > 0 ? 'show' : ''}" onclick="prevQuestion('${type}', ${i})">← 前の問題へ</button>
-        <button class="next-btn" id="${type}-next-${i}" onclick="nextQuestion('${type}', ${i})">
+        ${i > 0 ? `<button class="prev-btn show" onclick="prevQuestion('${type}',${i})">← 前の問題へ</button>` : ''}
+        <button class="next-btn" id="${type}-next-${i}" onclick="nextQuestion('${type}',${i})">
           ${i < total - 1 ? '次の問題へ →' : '結果を見る 🏆'}
         </button>
       </div>
@@ -2517,57 +2706,72 @@ function renderQuiz(type) {
 }
 
 // =========================================================
-// PREV QUESTION (戻る)
+// SUBMIT ANSWER
 // =========================================================
-function prevQuestion(type, qIdx) {
-  if (qIdx === 0) return;
-  document.getElementById(type + '-q-' + qIdx).classList.remove('active');
-  const prevIdx = qIdx - 1;
-  const prevCard = document.getElementById(type + '-q-' + prevIdx);
-  prevCard.classList.add('active');
-  prevCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
-}
-
-// =========================================================
-// ANSWER
-// =========================================================
-function answerQuestion(type, qIdx, optIdx) {
+function submitAnswer(type, qIdx) {
   const questions = getQuestions(type);
   const q = questions[qIdx];
   const s = state[type];
   const total = questions.length;
   if (s.answered[qIdx] !== null) return;
-  s.answered[qIdx] = optIdx;
 
-  const correct = optIdx === q.ans;
-  if (correct) s.score++;
-  document.getElementById(type + '-score-display').innerHTML = s.score + ` <span>/ ${total}</span>`;
-
-  for (let j = 0; j < 4; j++) {
-    const btn = document.getElementById(type + '-opt-' + qIdx + '-' + j);
-    btn.disabled = true;
-    if (j === q.ans) btn.classList.add('correct');
-    else if (j === optIdx && !correct) btn.classList.add('wrong');
+  const input = document.getElementById(type + '-input-' + qIdx);
+  const userAnswer = input.value.trim();
+  if (!userAnswer) {
+    input.placeholder = '英語を入力してから答えてね！';
+    input.focus();
+    return;
   }
+
+  const correct = isCorrectAnswer(userAnswer, q.answers);
+  s.answered[qIdx] = correct ? 1 : 0;
+  if (correct) s.score++;
+
+  input.disabled = true;
+  document.getElementById(type + '-submit-' + qIdx).disabled = true;
+  document.getElementById(type + '-score-display').innerHTML = s.score + ' <span>/ ' + total + '</span>';
 
   const fb = document.getElementById(type + '-fb-' + qIdx);
   fb.classList.add('show');
+
+  const badge = document.getElementById(type + '-badge-' + qIdx);
   if (correct) {
-    fb.classList.add('fb-correct');
-    fb.querySelector('.fb-icon').textContent = '🎉';
-    fb.querySelector('.fb-main').textContent = '正解！素晴らしい！';
+    badge.textContent = '🎉 正解！ 素晴らしい！';
+    badge.className = 'fb-result-badge badge-correct';
+    input.classList.add('input-correct');
   } else {
-    fb.classList.add('fb-wrong');
-    fb.querySelector('.fb-icon').textContent = '😅';
-    fb.querySelector('.fb-main').textContent = '惜しい！正解は ' + ['A','B','C','D'][q.ans] + ' でした。';
+    badge.textContent = '😅 惜しい！正解を確認しよう';
+    badge.className = 'fb-result-badge badge-wrong';
+    input.classList.add('input-wrong');
+    const userRow = document.getElementById(type + '-user-row-' + qIdx);
+    userRow.style.display = 'flex';
+    document.getElementById(type + '-user-ans-' + qIdx).textContent = userAnswer;
   }
-  fb.querySelector('.fb-explanation').textContent = q.exp;
+
+  document.getElementById(type + '-correct-' + qIdx).textContent = q.main;
+
+  const expBox = document.getElementById(type + '-exp-' + qIdx);
+  expBox.textContent = q.exp;
+  expBox.classList.add('show');
 
   document.getElementById(type + '-next-' + qIdx).classList.add('show');
 
-  const answeredCount = s.answered.filter(a => a !== null).length;
-  document.getElementById(type + '-progress').style.width = (answeredCount / total * 100) + '%';
-  document.getElementById(type + '-progress-label').textContent = answeredCount + ' / ' + total;
+  const answered = s.answered.filter(a => a !== null).length;
+  document.getElementById(type + '-progress').style.width = (answered / total * 100) + '%';
+  document.getElementById(type + '-progress-label').textContent = answered + ' / ' + total;
+
+  setTimeout(() => speakQAfter(type, qIdx), 400);
+}
+
+// =========================================================
+// PREV QUESTION
+// =========================================================
+function prevQuestion(type, qIdx) {
+  if (qIdx === 0) return;
+  document.getElementById(type + '-q-' + qIdx).classList.remove('active');
+  const prev = document.getElementById(type + '-q-' + (qIdx - 1));
+  prev.classList.add('active');
+  prev.scrollIntoView({ behavior: 'smooth', block: 'center' });
 }
 
 // =========================================================
@@ -2581,6 +2785,10 @@ function nextQuestion(type, qIdx) {
     const nextCard = document.getElementById(type + '-q-' + nextIdx);
     nextCard.classList.add('active');
     nextCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    if (state[type].answered[nextIdx] === null) {
+      const inp = document.getElementById(type + '-input-' + nextIdx);
+      if (inp) setTimeout(() => inp.focus(), 400);
+    }
   } else {
     showResult(type);
   }
@@ -2593,23 +2801,23 @@ function showResult(type) {
   const s = state[type];
   const total = getQuestions(type).length;
   const score = s.score;
+  const pct   = score / total;
   const result = document.getElementById(type + '-result');
   document.getElementById(type + '-quiz-area').style.display = 'none';
 
-  const pct = score / total;
   let grade, gradeClass, trophy, msg, sub;
   if (pct >= 0.9) {
     grade = 'S RANK 🌟'; gradeClass = 'grade-s'; trophy = '🏆';
-    msg = '完璧！あなたは天才です！'; sub = '満点に近いスコア！もうネイティブ並みです✨';
+    msg = '完璧！ネイティブ並みです！'; sub = 'すべての英文を正確に書けました✨';
   } else if (pct >= 0.75) {
     grade = 'A RANK ⭐'; gradeClass = 'grade-a'; trophy = '🥇';
-    msg = '素晴らしい！とても良くできました！'; sub = 'あと少し練習すれば完璧です！';
-  } else if (pct >= 0.55) {
+    msg = '素晴らしい！よくできました！'; sub = 'あと少しで完璧です！間違えた問題を復習しよう。';
+  } else if (pct >= 0.5) {
     grade = 'B RANK 👍'; gradeClass = 'grade-b'; trophy = '🥈';
-    msg = 'よくできました！'; sub = '基本はバッチリ！もう少し練習しましょう。';
+    msg = 'よくできました！'; sub = '基本はOK！解説を見直してもう一度挑戦しよう。';
   } else {
     grade = 'C RANK 📚'; gradeClass = 'grade-c'; trophy = '📖';
-    msg = 'もう一度チャレンジ！'; sub = '解説を見直して、また挑戦してみよう！';
+    msg = 'もう一度チャレンジ！'; sub = '解説タブを読み直してから再挑戦しよう！';
   }
 
   const color = type === 'will' ? 'var(--will-blue)' : type === 'gonna' ? 'var(--gonna-orange)' : '#7C3AED';
@@ -2643,7 +2851,7 @@ function showResult(type) {
 function retryQuiz(type) {
   const total = getQuestions(type).length;
   state[type] = { score: 0, answered: new Array(total).fill(null) };
-  document.getElementById(type + '-score-display').innerHTML = `0 <span>/ ${total}</span>`;
+  document.getElementById(type + '-score-display').innerHTML = '0 <span>/ ' + total + '</span>';
   document.getElementById(type + '-progress').style.width = '0%';
   document.getElementById(type + '-progress-label').textContent = '0 / ' + total;
   document.getElementById(type + '-quiz-area').style.display = '';
@@ -2662,15 +2870,8 @@ function launchConfetti() {
     piece.className = 'confetti-piece';
     const color = colors[Math.floor(Math.random() * colors.length)];
     const shape = shapes[Math.floor(Math.random() * shapes.length)];
-    const size = Math.random() * 10 + 6;
-    piece.style.cssText = `
-      left: ${Math.random() * 100}%;
-      background: ${color};
-      width: ${size}px;
-      height: ${size}px;
-      border-radius: ${shape};
-      animation: confettiFall ${Math.random() * 2 + 1.5}s ease-in ${Math.random() * 1}s forwards;
-    `;
+    const size  = Math.random() * 10 + 6;
+    piece.style.cssText = `left:${Math.random()*100}%;background:${color};width:${size}px;height:${size}px;border-radius:${shape};animation:confettiFall ${Math.random()*2+1.5}s ease-in ${Math.random()*1}s forwards;`;
     container.appendChild(piece);
   }
   setTimeout(() => { container.innerHTML = ''; }, 4000);
@@ -2697,6 +2898,7 @@ renderQuiz('gonna');
 renderQuiz('mix');
 observeFadeIns();
 document.addEventListener('scroll', () => observeFadeIns(), { passive: true });
+
 </script>
 </body>
 </html>
