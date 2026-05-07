@@ -820,6 +820,79 @@
     .highlight-will-inline { color: var(--will-blue); font-weight: 800; }
     .highlight-gonna-inline { color: var(--gonna-orange); font-weight: 800; }
 
+    /* ===== SPEAK / PREV BUTTONS ===== */
+    .q-card-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 14px;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .speak-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      background: linear-gradient(135deg, #ECFDF5, #D1FAE5);
+      border: 2px solid #10B981;
+      border-radius: 20px;
+      padding: 5px 14px;
+      font-family: var(--font-ja);
+      font-size: 12px;
+      font-weight: 800;
+      color: #065F46;
+      cursor: pointer;
+      box-shadow: 2px 2px 0 #10B981;
+      transition: all 0.15s;
+      white-space: nowrap;
+    }
+    .speak-btn:hover {
+      transform: translate(-1px, -1px);
+      box-shadow: 3px 3px 0 #10B981;
+    }
+    .speak-btn.speaking {
+      background: linear-gradient(135deg, #D1FAE5, #6EE7B7);
+      animation: speakPulse 0.6s ease-in-out infinite alternate;
+    }
+    @keyframes speakPulse {
+      from { box-shadow: 2px 2px 0 #10B981; }
+      to   { box-shadow: 4px 4px 0 #059669; }
+    }
+
+    .q-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 18px;
+      flex-wrap: wrap;
+    }
+    .prev-btn {
+      display: none;
+      align-items: center;
+      gap: 6px;
+      background: #F3F4F6;
+      border: 2.5px solid #9CA3AF;
+      border-radius: 10px;
+      padding: 11px 20px;
+      font-family: var(--font-ja);
+      font-size: 14px;
+      font-weight: 800;
+      color: #374151;
+      cursor: pointer;
+      box-shadow: 2px 2px 0 #9CA3AF;
+      transition: all 0.15s;
+    }
+    .prev-btn.show { display: inline-flex; }
+    .prev-btn:hover {
+      transform: translate(-1px, -1px);
+      box-shadow: 3px 3px 0 #6B7280;
+    }
+
+    /* ===== MIXED QUIZ ===== */
+    .mix-header {
+      background: linear-gradient(135deg, #312E81, #7C3AED);
+    }
+
     /* ===== RESPONSIVE ===== */
     @media (max-width: 640px) {
       .quiz-header { flex-direction: column; }
@@ -855,6 +928,7 @@
     <button class="tab-btn" onclick="switchTab('detail')"><span class="tab-icon">🔍</span>詳しい違い</button>
     <button class="tab-btn" onclick="switchTab('quiz-will')"><span class="tab-icon">🔵</span>Will クイズ</button>
     <button class="tab-btn" onclick="switchTab('quiz-gonna')"><span class="tab-icon">🟠</span>Gonna クイズ</button>
+    <button class="tab-btn" onclick="switchTab('quiz-mix')"><span class="tab-icon">🎯</span>ミックス</button>
   </div>
 </div>
 
@@ -1755,7 +1829,7 @@
   <div class="quiz-header">
     <div class="quiz-title-wrap">
       <h2>🔵 Will クイズ</h2>
-      <p>全20問 — 正しい選択肢を選ぼう！</p>
+      <p>全30問 — 正しい選択肢を選ぼう！</p>
     </div>
     <div class="quiz-score-display" id="will-score-display">0 <span>/ 20</span></div>
   </div>
@@ -1774,7 +1848,7 @@
   <div class="quiz-header" style="background:linear-gradient(135deg,#1a1a1a,#431407);">
     <div class="quiz-title-wrap">
       <h2>🟠 Gonna クイズ</h2>
-      <p>全20問 — 正しい選択肢を選ぼう！</p>
+      <p>全30問 — 正しい選択肢を選ぼう！</p>
     </div>
     <div class="quiz-score-display" id="gonna-score-display">0 <span>/ 20</span></div>
   </div>
@@ -1786,6 +1860,23 @@
 
   <div id="gonna-quiz-area"></div>
   <div class="result-screen" id="gonna-result"></div>
+</section>
+
+<!-- ===== MIX QUIZ ===== -->
+<section class="section" id="section-quiz-mix">
+  <div class="quiz-header mix-header">
+    <div class="quiz-title-wrap">
+      <h2>🎯 Will vs Gonna ミックスクイズ</h2>
+      <p>全20問 — どちらを使うか判断しよう！</p>
+    </div>
+    <div class="quiz-score-display" id="mix-score-display">0 <span>/ 20</span></div>
+  </div>
+  <div class="progress-wrap">
+    <div class="progress-bar" id="mix-progress" style="width:0%; background:linear-gradient(90deg,#7C3AED,#F472B6);"></div>
+    <div class="progress-label" id="mix-progress-label">0 / 20</div>
+  </div>
+  <div id="mix-quiz-area"></div>
+  <div class="result-screen" id="mix-result"></div>
 </section>
 
 <script>
@@ -1913,6 +2004,77 @@ const WILL_QUESTIONS = [
     opts: ["I'll try my best.", 'I willing try my best.', 'I would tried my best.', 'I going try my best.'],
     ans: 0,
     exp: "I'll = I will。I'll try my best. は最もよく使われる自然な表現です！"
+  },
+  // ── 🇯🇵→🇬🇧 翻訳問題 ──
+  {
+    q: '🇯🇵→🇬🇧 日本語を英語にしよう！\n「私は明日勉強します」',
+    opts: ['I will study tomorrow.', 'I gonna study tomorrow.', 'I studying tomorrow.', 'I will studying tomorrow.'],
+    ans: 0,
+    exp: 'will + 動詞の原形。I will study tomorrow. が正解です。',
+    speak: 'I will study tomorrow.'
+  },
+  {
+    q: '🇯🇵→🇬🇧 日本語を英語にしよう！\n「ドアを閉めてもらえますか？」',
+    opts: ['Will you close the door?', 'Are you gonna close the door?', 'Do you will close the door?', 'You will close the door?'],
+    ans: 0,
+    exp: 'Will you...? は「〜してもらえますか？」という丁寧な依頼表現です。',
+    speak: 'Will you close the door?'
+  },
+  {
+    q: '🇯🇵→🇬🇧 日本語を英語にしよう！\n「雨は降らないでしょう」',
+    opts: ["It won't rain.", "It's not gonna rain.", 'It will not rains.', "It doesn't rain."],
+    ans: 0,
+    exp: "will not の短縮形 won't。It won't rain. が正解です。",
+    speak: "It won't rain."
+  },
+  {
+    q: '🇯🇵→🇬🇧 日本語を英語にしよう！\n「私がやります！（今この場で決めた）」',
+    opts: ["I'll do it!", "I'm gonna do it!", 'I do it!', 'I will doing it!'],
+    ans: 0,
+    exp: "今この瞬間に決めた → will。I'll do it! (= I will do it!) が正解。",
+    speak: "I'll do it!"
+  },
+  {
+    q: '🇯🇵→🇬🇧 日本語を英語にしよう！\n「彼女はきっとあなたを助けてくれるでしょう」',
+    opts: ['She will help you.', "She's gonna help you.", 'She will helps you.', 'She helping you.'],
+    ans: 0,
+    exp: '経験からの確信・予測 → will。She will help you. が正解です。',
+    speak: 'She will help you.'
+  },
+  {
+    q: '🇯🇵→🇬🇧 日本語を英語にしよう！\n「私は絶対に嘘をつきません」',
+    opts: ['I will never lie.', "I'm not gonna lie.", "I don't lie.", 'I will not lying.'],
+    ans: 0,
+    exp: '強い意志の誓いには will。I will never lie. が正解です。',
+    speak: 'I will never lie.'
+  },
+  {
+    q: '🇯🇵→🇬🇧 日本語を英語にしよう！\n「バッグを持ちましょうか？（今申し出た）」',
+    opts: ["I'll carry your bag.", "I'm gonna carry your bag.", 'I carry your bag.', 'I will carrying your bag.'],
+    ans: 0,
+    exp: '自発的な申し出 → will。I\'ll carry your bag. が正解です。',
+    speak: "I'll carry your bag."
+  },
+  {
+    q: '🇯🇵→🇬🇧 日本語を英語にしよう！\n「彼らは来週到着するでしょう」',
+    opts: ['They will arrive next week.', "They're gonna arrive next week.", 'They arrive next week.', 'They will arrives next week.'],
+    ans: 0,
+    exp: '未来の予測 → will。They will arrive next week. が正解。',
+    speak: 'They will arrive next week.'
+  },
+  {
+    q: '🇯🇵→🇬🇧 日本語を英語にしよう！\n「あなたはこの映画が気に入るでしょう！」',
+    opts: ['You will love this movie!', "You're gonna love this movie!", 'You loving this movie!', 'You will loving this movie!'],
+    ans: 0,
+    exp: '経験からの確信・予測 → will。You will love this movie! が正解。',
+    speak: 'You will love this movie!'
+  },
+  {
+    q: '🇯🇵→🇬🇧 日本語を英語にしよう！\n「彼は午後3時に来るでしょう」',
+    opts: ['He will come at 3 PM.', "He's gonna come at 3 PM.", 'He comes at 3 PM.', 'He will came at 3 PM.'],
+    ans: 0,
+    exp: '未来の予定（フォーマルに伝える）→ will。He will come at 3 PM. が正解。',
+    speak: 'He will come at 3 PM.'
   }
 ];
 
@@ -2036,6 +2198,223 @@ const GONNA_QUESTIONS = [
     opts: ['I will attend the concert this evening.', "I'm gonna rock this concert! 🎸", 'I shall perform at the concert.', 'The concert will be attended by me.'],
     ans: 1,
     exp: "SNSはカジュアルな場所。I'm gonna rock this concert! 🎸 がネイティブっぽくて最高！"
+  },
+  // ── 🇯🇵→🇬🇧 翻訳問題 ──
+  {
+    q: '🇯🇵→🇬🇧 日本語を英語にしよう！\n「今夜外食するつもり」（友達に）',
+    opts: ["I'm gonna eat out tonight.", 'I will eat out tonight.', "I gonna eat out tonight.", 'I eating out tonight.'],
+    ans: 0,
+    exp: "前から決めていたカジュアルな計画 → gonna。I'm gonna eat out tonight. が正解。",
+    speak: "I'm gonna eat out tonight."
+  },
+  {
+    q: '🇯🇵→🇬🇧 日本語を英語にしよう！\n「彼女は来月引っ越す予定」',
+    opts: ["She's gonna move next month.", 'She will move next month.', "She gonna move next month.", 'She moves next month.'],
+    ans: 0,
+    exp: "前から決まっている計画をカジュアルに → gonna。She's gonna move next month. が正解。",
+    speak: "She's gonna move next month."
+  },
+  {
+    q: '🇯🇵→🇬🇧 日本語を英語にしよう！\n「（黒い雲を見て）雨が降りそう！」',
+    opts: ["It's gonna rain!", 'It will rain!', "It gonna rain!", 'It raining!'],
+    ans: 0,
+    exp: "目の前の証拠（黒い雲）があるときは gonna。It's gonna rain! が正解。",
+    speak: "It's gonna rain!"
+  },
+  {
+    q: '🇯🇵→🇬🇧 日本語を英語にしよう！\n「私は諦めないつもり！」',
+    opts: ["I'm not gonna give up!", "I won't give up!", "I'm not gonna gives up!", "I not gonna give up!"],
+    ans: 0,
+    exp: "カジュアルな強い意志 → gonna。I'm not gonna give up! が正解。",
+    speak: "I'm not gonna give up!"
+  },
+  {
+    q: '🇯🇵→🇬🇧 日本語を英語にしよう！\n「私たちは今夜パーティーをする予定」',
+    opts: ["We're gonna have a party tonight.", 'We will have a party tonight.', "We gonna have a party tonight.", "We're gonna has a party tonight."],
+    ans: 0,
+    exp: "前から計画したことをカジュアルに → gonna。We're gonna have a party tonight. が正解。",
+    speak: "We're gonna have a party tonight."
+  },
+  {
+    q: '🇯🇵→🇬🇧 日本語を英語にしよう！\n「彼はゲームをする予定」',
+    opts: ["He's gonna play games.", 'He will play games.', "He gonna play games.", "He's gonna plays games."],
+    ans: 0,
+    exp: "計画をカジュアルに表現 → gonna。He's gonna play games. が正解。",
+    speak: "He's gonna play games."
+  },
+  {
+    q: '🇯🇵→🇬🇧 日本語を英語にしよう！\n「明日ジムに行くつもり！」（友達への投稿）',
+    opts: ["I'm gonna go to the gym tomorrow!", 'I will go to the gym tomorrow!', "I gonna go to the gym tomorrow!", "I'm gonna goes to the gym tomorrow!"],
+    ans: 0,
+    exp: "カジュアルな計画の投稿 → gonna。I'm gonna go to the gym tomorrow! が正解。",
+    speak: "I'm gonna go to the gym tomorrow!"
+  },
+  {
+    q: '🇯🇵→🇬🇧 日本語を英語にしよう！\n「これは最高になりそう！」',
+    opts: ["It's gonna be amazing!", 'It will be amazing!', "It gonna be amazing!", "It's gonna amazing!"],
+    ans: 0,
+    exp: "盛り上がりや期待感をカジュアルに → gonna。It's gonna be amazing! が正解。",
+    speak: "It's gonna be amazing!"
+  },
+  {
+    q: '🇯🇵→🇬🇧 日本語を英語にしよう！\n「彼らは来月日本に来る予定」',
+    opts: ["They're gonna come to Japan next month.", 'They will come to Japan next month.', "They gonna come to Japan next month.", "They're gonna comes to Japan next month."],
+    ans: 0,
+    exp: "前から決まっている旅行の計画 → gonna。They're gonna come to Japan next month. が正解。",
+    speak: "They're gonna come to Japan next month."
+  },
+  {
+    q: '🇯🇵→🇬🇧 日本語を英語にしよう！\n「彼女は今夜夕食を作る予定」',
+    opts: ["She's gonna cook dinner tonight.", 'She will cook dinner tonight.', "She gonna cook dinner tonight.", "She's gonna cooking dinner tonight."],
+    ans: 0,
+    exp: "前から決まっている計画 → gonna。She's gonna cook dinner tonight. が正解。",
+    speak: "She's gonna cook dinner tonight."
+  }
+];
+
+// =========================================================
+// MIXED QUESTIONS
+// =========================================================
+const MIXED_QUESTIONS = [
+  {
+    q: '📌 電話が突然鳴った！\n「私が出る！」— 正しい英文は？',
+    opts: ["I'll get it!", "I'm gonna get it!", 'I get it!', 'I will getting it!'],
+    ans: 0,
+    exp: "今この瞬間に決めた → will。I'll get it! (= I will get it!) が自然です。",
+    speak: "I'll get it!"
+  },
+  {
+    q: '📌 前から計画していた旅行。友達に話すとき\n「来月、沖縄に行く予定！」',
+    opts: ['I will go to Okinawa next month!', "I'm gonna go to Okinawa next month!", "I going to Okinawa!", 'I gonna go Okinawa next month!'],
+    ans: 1,
+    exp: "前から計画していた → gonna。I'm gonna go to Okinawa next month! が正解。",
+    speak: "I'm gonna go to Okinawa next month!"
+  },
+  {
+    q: '📌 空を見上げると黒い雲がいっぱい！\n「雨が降りそう！」と言うとき？',
+    opts: ['It will rain!', "It's gonna rain!", "It gonna rain!", 'It raining soon!'],
+    ans: 1,
+    exp: "目の前に証拠（黒い雲）がある → gonna。It's gonna rain! が正解。",
+    speak: "It's gonna rain!"
+  },
+  {
+    q: '📌 ビジネスメールで上司に報告\n「月曜日までに資料を送ります」',
+    opts: ["I'm gonna send the document by Monday.", 'I will send the document by Monday.', "I sending document by Monday.", "I'll gonna send it by Monday."],
+    ans: 1,
+    exp: "フォーマルな約束・メール → will。I will send the document by Monday. が正解。",
+    speak: "I will send the document by Monday."
+  },
+  {
+    q: '📌 重い荷物を持っている人を見てすぐ申し出る\n「持ちましょうか！」',
+    opts: ["I'm gonna carry that!", "I'll carry that for you!", "I carry that!", 'I will carrying that!'],
+    ans: 1,
+    exp: "今この瞬間に「助けよう！」と決めた → will。I'll carry that for you! が正解。",
+    speak: "I'll carry that for you!"
+  },
+  {
+    q: '📌 友達と話していて（前から決めていた）\n「今週末キャンプに行く予定！」',
+    opts: ['I will go camping this weekend!', "I'm gonna go camping this weekend!", 'I going camping this weekend!', 'I gonna camping this weekend!'],
+    ans: 1,
+    exp: "前から計画していたことをカジュアルに → gonna。I'm gonna go camping this weekend! が正解。",
+    speak: "I'm gonna go camping this weekend!"
+  },
+  {
+    q: '📌 友達の顔色がとても悪い。見て思った\n「具合悪くなりそう...」',
+    opts: ['He will be sick.', "He's gonna be sick.", 'He sick now.', 'He will being sick.'],
+    ans: 1,
+    exp: "顔色という「目の前の証拠」があるから → gonna。He's gonna be sick. が正解。",
+    speak: "He's gonna be sick."
+  },
+  {
+    q: '📌 結婚式の誓いの言葉として正しいのは？',
+    opts: ["I'm gonna love you forever.", 'I will love you forever.', 'I loving you forever.', 'I gonna love you always.'],
+    ans: 1,
+    exp: "公式な誓い・フォーマルな約束 → will。I will love you forever. が正解。",
+    speak: "I will love you forever."
+  },
+  {
+    q: '📌 荷物を持った人に丁寧にドアを開けてほしい\n「ドアを開けてもらえますか？」',
+    opts: ["Are you gonna open the door?", 'Will you open the door?', 'You open the door?', 'Gonna open the door?'],
+    ans: 1,
+    exp: "丁寧な依頼・お願い → Will you...? が自然です。",
+    speak: "Will you open the door?"
+  },
+  {
+    q: '📌 Instagramに投稿！\n「今夜最高に楽しむぞ！🎉」',
+    opts: ['I will have an amazing time tonight!', "I'm gonna have an amazing time tonight! 🎉", 'I amazing time tonight!', 'I gonna amazing tonight!'],
+    ans: 1,
+    exp: "SNS・カジュアル・盛り上がり → gonna。I'm gonna have an amazing time tonight! が正解。",
+    speak: "I'm gonna have an amazing time tonight!"
+  },
+  {
+    q: '📌 電車がもうすぐ出発しそう！ホームで\n「（今まさに）電車が出る！急いで！」',
+    opts: ['The train will leave! Hurry!', "The train's gonna leave! Hurry!", 'The train leaving! Hurry!', 'The train gonna leave! Hurry!'],
+    ans: 1,
+    exp: "今まさに起きていること（証拠あり）→ gonna。The train's gonna leave! が正解。",
+    speak: "The train's gonna leave! Hurry!"
+  },
+  {
+    q: '📌 会社のプレゼンで来年の予測を報告\n「来年の売上は20%増えるでしょう」',
+    opts: ["Sales are gonna increase 20% next year.", 'Sales will increase 20% next year.', 'Sales increasing 20% next year.', 'Sales gonna increase 20% next year.'],
+    ans: 1,
+    exp: "フォーマルなプレゼン・データに基づく予測 → will。Sales will increase 20% next year. が正解。",
+    speak: "Sales will increase 20% next year."
+  },
+  {
+    q: '📌 カフェでメニューを見て今決めた\n「えっと、ラテにします！」',
+    opts: ["I'm gonna have a latte.", "I'll have a latte!", 'I having a latte.', 'I gonna have a latte.'],
+    ans: 1,
+    exp: "メニューを見て今この瞬間に決めた → will。I'll have a latte! が自然です。",
+    speak: "I'll have a latte!"
+  },
+  {
+    q: '📌 ゲームの前に友達に宣言！（カジュアル）\n「絶対に勝つぞ！」',
+    opts: ['I will win for sure!', "I'm gonna win this!", 'I winning this game!', "I'll gonna win!"],
+    ans: 1,
+    exp: "カジュアルな意気込み・盛り上がり → gonna。I'm gonna win this! が自然です。",
+    speak: "I'm gonna win this!"
+  },
+  {
+    q: '📌 就職面接で将来の計画を答える\n「大学院に進学します」',
+    opts: ["I'm gonna go to graduate school.", 'I will attend graduate school.', 'I going to graduate school.', "I'll gonna study more."],
+    ans: 1,
+    exp: "面接などフォーマルな場面では will。I will attend graduate school. が正解。",
+    speak: "I will attend graduate school."
+  },
+  {
+    q: '📌 子供が今まさに転びそう！\n「あ！転びそう！」',
+    opts: ['She will fall!', "She's gonna fall!", 'She falling!', 'She gonna falls!'],
+    ans: 1,
+    exp: "今まさに起きている状況（証拠あり）→ gonna。She's gonna fall! が正解。",
+    speak: "She's gonna fall!"
+  },
+  {
+    q: '📌 病院の受付でフォーマルに伝える\n「3時に先生がいらっしゃいます」',
+    opts: ["The doctor's gonna be here at 3.", 'The doctor will be here at 3.', "Doctor's here at 3.", 'The doctor gonna be here at 3.'],
+    ans: 1,
+    exp: "フォーマルな伝達・予定通知 → will。The doctor will be here at 3. が正解。",
+    speak: "The doctor will be here at 3."
+  },
+  {
+    q: '📌 ライブ前にSNS投稿！\n「最高のショーにするぞ！🎸」',
+    opts: ['I will put on the best show!', "I'm gonna put on the best show! 🎸", "I'm gonna puts on the best show!", 'I best show gonna!'],
+    ans: 1,
+    exp: "SNS・カジュアル・熱い意気込み → gonna。I'm gonna put on the best show! 🎸 が正解。",
+    speak: "I'm gonna put on the best show!"
+  },
+  {
+    q: '📌 誰かが「助けてほしい」と言ってきた。即座に\n「もちろん、手伝いますよ！」',
+    opts: ["I'm gonna help you!", "I'll help you!", 'I helping you!', 'I gonna help!'],
+    ans: 1,
+    exp: "その場で即座に決めた申し出 → will。I'll help you! が自然です。",
+    speak: "I'll help you!"
+  },
+  {
+    q: '📌 友達に「週末どうする？」と聞かれた。前から計画済み\n「土曜日は友達の家でゲームする予定！」',
+    opts: ["I will play games at my friend's place on Saturday!", "I'm gonna play games at my friend's place on Saturday!", 'I games Saturday.', "I gonna games my friend's!"],
+    ans: 1,
+    exp: "前から決まっていた予定をカジュアルに → gonna。I'm gonna play games at my friend's place! が正解。",
+    speak: "I'm gonna play games at my friend's place on Saturday!"
   }
 ];
 
@@ -2043,9 +2422,19 @@ const GONNA_QUESTIONS = [
 // STATE
 // =========================================================
 const state = {
-  will: { current: 0, score: 0, answered: new Array(20).fill(null) },
-  gonna: { current: 0, score: 0, answered: new Array(20).fill(null) }
+  will:  { score: 0, answered: new Array(WILL_QUESTIONS.length).fill(null) },
+  gonna: { score: 0, answered: new Array(GONNA_QUESTIONS.length).fill(null) },
+  mix:   { score: 0, answered: new Array(MIXED_QUESTIONS.length).fill(null) }
 };
+
+// =========================================================
+// HELPERS
+// =========================================================
+function getQuestions(type) {
+  if (type === 'will')  return WILL_QUESTIONS;
+  if (type === 'gonna') return GONNA_QUESTIONS;
+  return MIXED_QUESTIONS;
+}
 
 // =========================================================
 // TAB SWITCHING
@@ -2054,17 +2443,38 @@ function switchTab(tab) {
   document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
   document.getElementById('section-' + tab).classList.add('active');
-  const idx = ['learn','examples','tips','detail','quiz-will','quiz-gonna'].indexOf(tab);
+  const idx = ['learn','examples','tips','detail','quiz-will','quiz-gonna','quiz-mix'].indexOf(tab);
   document.querySelectorAll('.tab-btn')[idx].classList.add('active');
   window.scrollTo({ top: 0, behavior: 'smooth' });
   observeFadeIns();
 }
 
 // =========================================================
+// SPEAK (発音)
+// =========================================================
+function speakQuestion(type, qIdx) {
+  const q = getQuestions(type)[qIdx];
+  const text = q.speak || q.opts[q.ans];
+  if (!text || !/[a-zA-Z]/.test(text)) return;
+  window.speechSynthesis.cancel();
+  const utt = new SpeechSynthesisUtterance(text);
+  utt.lang = 'en-US';
+  utt.rate = 0.85;
+  utt.pitch = 1;
+  const btn = document.getElementById(type + '-speak-' + qIdx);
+  if (btn) {
+    btn.classList.add('speaking');
+    utt.onend = () => btn.classList.remove('speaking');
+  }
+  window.speechSynthesis.speak(utt);
+}
+
+// =========================================================
 // RENDER QUIZ
 // =========================================================
 function renderQuiz(type) {
-  const questions = type === 'will' ? WILL_QUESTIONS : GONNA_QUESTIONS;
+  const questions = getQuestions(type);
+  const total = questions.length;
   const area = document.getElementById(type + '-quiz-area');
   const result = document.getElementById(type + '-result');
   area.innerHTML = '';
@@ -2085,35 +2495,54 @@ function renderQuiz(type) {
     `).join('');
 
     card.innerHTML = `
-      <div class="q-num-badge">問題 ${i + 1} / 20</div>
+      <div class="q-card-header">
+        <div class="q-num-badge">問題 ${i + 1} / ${total}</div>
+        <button class="speak-btn" id="${type}-speak-${i}" onclick="speakQuestion('${type}', ${i})">🔊 発音を聞く</button>
+      </div>
       <div class="q-text">${q.q.replace(/\n/g, '<br>')}</div>
       <div class="options-grid">${opts}</div>
       <div class="q-feedback" id="${type}-fb-${i}">
         <span class="fb-icon"></span>
         <div><div class="fb-main"></div><div class="fb-explanation"></div></div>
       </div>
-      <button class="next-btn" id="${type}-next-${i}" onclick="nextQuestion('${type}', ${i})">
-        ${i < 19 ? '次の問題へ →' : '結果を見る 🏆'}
-      </button>
+      <div class="q-actions">
+        <button class="prev-btn ${i > 0 ? 'show' : ''}" onclick="prevQuestion('${type}', ${i})">← 前の問題へ</button>
+        <button class="next-btn" id="${type}-next-${i}" onclick="nextQuestion('${type}', ${i})">
+          ${i < total - 1 ? '次の問題へ →' : '結果を見る 🏆'}
+        </button>
+      </div>
     `;
     area.appendChild(card);
   });
 }
 
 // =========================================================
+// PREV QUESTION (戻る)
+// =========================================================
+function prevQuestion(type, qIdx) {
+  if (qIdx === 0) return;
+  document.getElementById(type + '-q-' + qIdx).classList.remove('active');
+  const prevIdx = qIdx - 1;
+  const prevCard = document.getElementById(type + '-q-' + prevIdx);
+  prevCard.classList.add('active');
+  prevCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+// =========================================================
 // ANSWER
 // =========================================================
 function answerQuestion(type, qIdx, optIdx) {
-  const q = type === 'will' ? WILL_QUESTIONS[qIdx] : GONNA_QUESTIONS[qIdx];
+  const questions = getQuestions(type);
+  const q = questions[qIdx];
   const s = state[type];
+  const total = questions.length;
   if (s.answered[qIdx] !== null) return;
   s.answered[qIdx] = optIdx;
 
   const correct = optIdx === q.ans;
   if (correct) s.score++;
-  document.getElementById(type + '-score-display').innerHTML = s.score + ' <span>/ 20</span>';
+  document.getElementById(type + '-score-display').innerHTML = s.score + ` <span>/ ${total}</span>`;
 
-  // Style buttons
   for (let j = 0; j < 4; j++) {
     const btn = document.getElementById(type + '-opt-' + qIdx + '-' + j);
     btn.disabled = true;
@@ -2121,7 +2550,6 @@ function answerQuestion(type, qIdx, optIdx) {
     else if (j === optIdx && !correct) btn.classList.add('wrong');
   }
 
-  // Feedback
   const fb = document.getElementById(type + '-fb-' + qIdx);
   fb.classList.add('show');
   if (correct) {
@@ -2135,26 +2563,24 @@ function answerQuestion(type, qIdx, optIdx) {
   }
   fb.querySelector('.fb-explanation').textContent = q.exp;
 
-  // Show next btn
-  const nextBtn = document.getElementById(type + '-next-' + qIdx);
-  nextBtn.classList.add('show');
+  document.getElementById(type + '-next-' + qIdx).classList.add('show');
 
-  // Update progress (count answered)
   const answeredCount = s.answered.filter(a => a !== null).length;
-  const pct = (answeredCount / 20) * 100;
-  document.getElementById(type + '-progress').style.width = pct + '%';
-  document.getElementById(type + '-progress-label').textContent = answeredCount + ' / 20';
+  document.getElementById(type + '-progress').style.width = (answeredCount / total * 100) + '%';
+  document.getElementById(type + '-progress-label').textContent = answeredCount + ' / ' + total;
 }
 
 // =========================================================
 // NEXT QUESTION
 // =========================================================
 function nextQuestion(type, qIdx) {
+  const total = getQuestions(type).length;
   document.getElementById(type + '-q-' + qIdx).classList.remove('active');
   const nextIdx = qIdx + 1;
-  if (nextIdx < 20) {
-    document.getElementById(type + '-q-' + nextIdx).classList.add('active');
-    document.getElementById(type + '-q-' + nextIdx).scrollIntoView({ behavior: 'smooth', block: 'center' });
+  if (nextIdx < total) {
+    const nextCard = document.getElementById(type + '-q-' + nextIdx);
+    nextCard.classList.add('active');
+    nextCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
   } else {
     showResult(type);
   }
@@ -2165,18 +2591,20 @@ function nextQuestion(type, qIdx) {
 // =========================================================
 function showResult(type) {
   const s = state[type];
+  const total = getQuestions(type).length;
   const score = s.score;
   const result = document.getElementById(type + '-result');
   document.getElementById(type + '-quiz-area').style.display = 'none';
 
+  const pct = score / total;
   let grade, gradeClass, trophy, msg, sub;
-  if (score >= 18) {
+  if (pct >= 0.9) {
     grade = 'S RANK 🌟'; gradeClass = 'grade-s'; trophy = '🏆';
-    msg = '完璧！あなたは天才です！'; sub = '満点に近いスコアです！もうネイティブ並みです✨';
-  } else if (score >= 15) {
+    msg = '完璧！あなたは天才です！'; sub = '満点に近いスコア！もうネイティブ並みです✨';
+  } else if (pct >= 0.75) {
     grade = 'A RANK ⭐'; gradeClass = 'grade-a'; trophy = '🥇';
     msg = '素晴らしい！とても良くできました！'; sub = 'あと少し練習すれば完璧です！';
-  } else if (score >= 10) {
+  } else if (pct >= 0.55) {
     grade = 'B RANK 👍'; gradeClass = 'grade-b'; trophy = '🥈';
     msg = 'よくできました！'; sub = '基本はバッチリ！もう少し練習しましょう。';
   } else {
@@ -2184,32 +2612,40 @@ function showResult(type) {
     msg = 'もう一度チャレンジ！'; sub = '解説を見直して、また挑戦してみよう！';
   }
 
+  const color = type === 'will' ? 'var(--will-blue)' : type === 'gonna' ? 'var(--gonna-orange)' : '#7C3AED';
+  const nextBtns = type === 'will'
+    ? `<button class="retry-btn" style="background:#FFEDD5;color:var(--gonna-orange);" onclick="switchTab('quiz-gonna')">🟠 Gonna クイズへ</button>
+       <button class="retry-btn" style="background:#EDE9FE;color:#7C3AED;" onclick="switchTab('quiz-mix')">🎯 ミックスへ</button>`
+    : type === 'gonna'
+    ? `<button class="retry-btn" style="background:#DBEAFE;color:var(--will-blue);" onclick="switchTab('quiz-will')">🔵 Will クイズへ</button>
+       <button class="retry-btn" style="background:#EDE9FE;color:#7C3AED;" onclick="switchTab('quiz-mix')">🎯 ミックスへ</button>`
+    : `<button class="retry-btn" style="background:#DBEAFE;color:var(--will-blue);" onclick="switchTab('quiz-will')">🔵 Will クイズへ</button>
+       <button class="retry-btn" style="background:#FFEDD5;color:var(--gonna-orange);" onclick="switchTab('quiz-gonna')">🟠 Gonna クイズへ</button>`;
+
   result.innerHTML = `
     <div class="result-trophy">${trophy}</div>
-    <div class="result-score-big" style="color:${type === 'will' ? 'var(--will-blue)' : 'var(--gonna-orange)'}">
-      ${score} <span class="out-of">/ 20</span>
-    </div>
+    <div class="result-score-big" style="color:${color}">${score} <span class="out-of">/ ${total}</span></div>
     <div class="result-grade ${gradeClass}">${grade}</div>
     <div class="result-message">${msg}</div>
     <div class="result-sub">${sub}</div>
-    <div style="margin-top:32px; display:flex; gap:12px; justify-content:center; flex-wrap:wrap;">
+    <div style="margin-top:32px;display:flex;gap:12px;justify-content:center;flex-wrap:wrap;">
       <button class="retry-btn" onclick="retryQuiz('${type}')">🔄 もう一度挑戦</button>
-      ${type === 'will' ? '<button class="retry-btn" style="background:#FFEDD5; color:var(--gonna-orange);" onclick="switchTab(\'quiz-gonna\')">🟠 Gonna クイズへ</button>' : '<button class="retry-btn" style="background:#DBEAFE; color:var(--will-blue);" onclick="switchTab(\'quiz-will\')">🔵 Will クイズへ</button>'}
+      ${nextBtns}
     </div>
   `;
   result.classList.add('show');
-
-  if (score >= 15) launchConfetti();
+  if (pct >= 0.75) launchConfetti();
 }
 
 // =========================================================
 // RETRY
 // =========================================================
 function retryQuiz(type) {
-  state[type] = { current: 0, score: 0, answered: new Array(20).fill(null) };
-  document.getElementById(type + '-score-display').innerHTML = '0 <span>/ 20</span>';
+  const total = getQuestions(type).length;
+  state[type] = { score: 0, answered: new Array(total).fill(null) };
+  document.getElementById(type + '-score-display').innerHTML = `0 <span>/ ${total}</span>`;
   document.getElementById(type + '-progress').style.width = '0%';
-  document.getElementById(type + '-progress-label').textContent = '0 / 20';
+  document.getElementById(type + '-progress-label').textContent = '0 / ' + total;
   document.getElementById(type + '-quiz-area').style.display = '';
   renderQuiz(type);
 }
@@ -2258,6 +2694,7 @@ function observeFadeIns() {
 // =========================================================
 renderQuiz('will');
 renderQuiz('gonna');
+renderQuiz('mix');
 observeFadeIns();
 document.addEventListener('scroll', () => observeFadeIns(), { passive: true });
 </script>
